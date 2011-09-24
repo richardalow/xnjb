@@ -57,7 +57,6 @@
 		79342A2B06AFC98E009F3AFC /* MyNSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 79342A2906AFC98E009F3AFC /* MyNSWindow.h */; };
 		79342A2C06AFC98E009F3AFC /* MyNSWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 79342A2A06AFC98E009F3AFC /* MyNSWindow.m */; };
 		7936C0B006B6C67200C6514A /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7936C0AF06B6C67200C6514A /* IOKit.framework */; };
-		793B6F240825671000A43F5B /* libusb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 793B6F230825671000A43F5B /* libusb.a */; };
 		7940A0E707C8EEE3004CF5F5 /* DuplicateItemsTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7940A0E507C8EEE3004CF5F5 /* DuplicateItemsTab.h */; };
 		7940A0E807C8EEE3004CF5F5 /* DuplicateItemsTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 7940A0E607C8EEE3004CF5F5 /* DuplicateItemsTab.m */; };
 		7941ECB308117FB500B4099D /* MyNSArrayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7941ECB108117FB500B4099D /* MyNSArrayController.h */; };
@@ -75,7 +74,6 @@
 		795E14D2076E324F00B48423 /* DragDropTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 795E14D0076E324F00B48423 /* DragDropTableView.m */; };
 		795E167406A6D24A00AFF0F6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 795E167306A6D24A00AFF0F6 /* icon.icns */; };
 		795E169606A6D37300AFF0F6 /* tag.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 795E169506A6D37300AFF0F6 /* tag.tiff */; };
-		79740B0B0F6C3AB50075149C /* libtaglib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79740B0A0F6C3AB50075149C /* libtaglib.a */; };
 		79744EE3116F96F200B8E696 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 79744EDB116F96F200B8E696 /* config.h */; };
 		79744EE4116F96F200B8E696 /* darwin.c in Sources */ = {isa = PBXBuildFile; fileRef = 79744EDC116F96F200B8E696 /* darwin.c */; };
 		79744EE5116F96F200B8E696 /* descriptors.c in Sources */ = {isa = PBXBuildFile; fileRef = 79744EDD116F96F200B8E696 /* descriptors.c */; };
@@ -84,6 +82,8 @@
 		79744EE8116F96F200B8E696 /* usb.c in Sources */ = {isa = PBXBuildFile; fileRef = 79744EE0116F96F200B8E696 /* usb.c */; };
 		79744EE9116F96F200B8E696 /* usb.h in Headers */ = {isa = PBXBuildFile; fileRef = 79744EE1116F96F200B8E696 /* usb.h */; };
 		79744EEA116F96F200B8E696 /* usbi.h in Headers */ = {isa = PBXBuildFile; fileRef = 79744EE2116F96F200B8E696 /* usbi.h */; };
+		797954D0142E05A200FDA262 /* libtaglib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 797407120F6BDC3A0075149C /* libtaglib.a */; };
+		797954D1142E05A200FDA262 /* libusb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 793B6DF008255CCC00A43F5B /* libusb.a */; };
 		797BCD9A06B81C7800DA245C /* running.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 797BCD9906B81C7800DA245C /* running.tiff */; };
 		797BCDA106B81D1300DA245C /* success.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 797BCDA006B81D1300DA245C /* success.tiff */; };
 		797BCDAD06B8529400DA245C /* failure.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 797BCDAB06B8529400DA245C /* failure.tiff */; };
@@ -94,7 +94,6 @@
 		797F81040AA496AB0085146E /* gphoto2-endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 797F80F70AA496AB0085146E /* gphoto2-endian.h */; };
 		797F81050AA496AB0085146E /* libmtp.c in Sources */ = {isa = PBXBuildFile; fileRef = 797F80F80AA496AB0085146E /* libmtp.c */; };
 		797F81060AA496AB0085146E /* libmtp.h in Headers */ = {isa = PBXBuildFile; fileRef = 797F80F90AA496AB0085146E /* libmtp.h */; };
-		797F81070AA496AB0085146E /* libptp-stdint.h in Headers */ = {isa = PBXBuildFile; fileRef = 797F80FA0AA496AB0085146E /* libptp-stdint.h */; };
 		797F81080AA496AB0085146E /* libusb-glue.c in Sources */ = {isa = PBXBuildFile; fileRef = 797F80FB0AA496AB0085146E /* libusb-glue.c */; };
 		797F81090AA496AB0085146E /* libusb-glue.h in Headers */ = {isa = PBXBuildFile; fileRef = 797F80FC0AA496AB0085146E /* libusb-glue.h */; };
 		797F810B0AA496AB0085146E /* ptp.c in Sources */ = {isa = PBXBuildFile; fileRef = 797F80FE0AA496AB0085146E /* ptp.c */; };
@@ -442,7 +441,6 @@
 		797F80F70AA496AB0085146E /* gphoto2-endian.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "gphoto2-endian.h"; path = "libmtp/src/gphoto2-endian.h"; sourceTree = "<group>"; };
 		797F80F80AA496AB0085146E /* libmtp.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = libmtp.c; path = libmtp/src/libmtp.c; sourceTree = "<group>"; };
 		797F80F90AA496AB0085146E /* libmtp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = libmtp.h; path = libmtp/src/libmtp.h; sourceTree = "<group>"; };
-		797F80FA0AA496AB0085146E /* libptp-stdint.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libptp-stdint.h"; path = "libmtp/src/libptp-stdint.h"; sourceTree = "<group>"; };
 		797F80FB0AA496AB0085146E /* libusb-glue.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = "libusb-glue.c"; path = "libmtp/src/libusb-glue.c"; sourceTree = "<group>"; };
 		797F80FC0AA496AB0085146E /* libusb-glue.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libusb-glue.h"; path = "libmtp/src/libusb-glue.h"; sourceTree = "<group>"; };
 		797F80FD0AA496AB0085146E /* ptp-pack.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = "ptp-pack.c"; path = "libmtp/src/ptp-pack.c"; sourceTree = "<group>"; };
@@ -494,7 +492,7 @@
 		79B7D0E211706E0A00CDBC4D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = src/main.m; sourceTree = "<group>"; };
 		79B7D0EA11706F2400CDBC4D /* Bulgarian */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Bulgarian; path = Resources/Bulgarian.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D0EC11706F2400CDBC4D /* Bulgarian */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Bulgarian; path = Resources/Bulgarian.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D0EE11706F2400CDBC4D /* Bulgarian */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Bulgarian; path = Resources/Bulgarian.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D0EE11706F2400CDBC4D /* Bulgarian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Bulgarian; path = Resources/Bulgarian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D0F011706F2400CDBC4D /* Bulgarian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Bulgarian; path = Resources/Bulgarian.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D0F211706F2400CDBC4D /* Bulgarian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Bulgarian; path = Resources/Bulgarian.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D0F811706F3400CDBC4D /* Danish */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Danish; path = Resources/Danish.lproj/Credits.html; sourceTree = "<group>"; };
@@ -509,7 +507,7 @@
 		79B7D10511706F4000CDBC4D /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Dutch; path = Resources/Dutch.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D10711706F4D00CDBC4D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = English; path = Resources/English.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D10811706F4D00CDBC4D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D10911706F4D00CDBC4D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D10911706F4D00CDBC4D /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D10A11706F4D00CDBC4D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D10B11706F4D00CDBC4D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D10C11706F5900CDBC4D /* Finnish */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Finnish; path = Resources/Finnish.lproj/Credits.html; sourceTree = "<group>"; };
@@ -519,32 +517,32 @@
 		79B7D11011706F5900CDBC4D /* Finnish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Finnish; path = Resources/Finnish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D11111706F6F00CDBC4D /* French */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = French; path = Resources/French.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D11211706F6F00CDBC4D /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = Resources/French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D11311706F6F00CDBC4D /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = Resources/French.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D11311706F6F00CDBC4D /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = French; path = Resources/French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D11411706F6F00CDBC4D /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = Resources/French.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D11511706F6F00CDBC4D /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = Resources/French.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D11611706F7800CDBC4D /* German */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = German; path = Resources/German.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D11711706F7800CDBC4D /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = Resources/German.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D11811706F7800CDBC4D /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = Resources/German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D11811706F7800CDBC4D /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = Resources/German.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D11911706F7800CDBC4D /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = Resources/German.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D11A11706F7800CDBC4D /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = Resources/German.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D11B11706F8500CDBC4D /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Resources/Italian.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D11C11706F8500CDBC4D /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Resources/Italian.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D11D11706F8500CDBC4D /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Resources/Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D11D11706F8500CDBC4D /* Italian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Italian; path = Resources/Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D11E11706F8500CDBC4D /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Resources/Italian.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D11F11706F8500CDBC4D /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Resources/Italian.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D12011706F8C00CDBC4D /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Portuguese; path = Resources/Portuguese.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D12111706F8C00CDBC4D /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Portuguese; path = Resources/Portuguese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D12211706F8C00CDBC4D /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Portuguese; path = Resources/Portuguese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D12211706F8C00CDBC4D /* Portuguese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Portuguese; path = Resources/Portuguese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D12311706F8D00CDBC4D /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Portuguese; path = Resources/Portuguese.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D12411706F8D00CDBC4D /* Portuguese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Portuguese; path = Resources/Portuguese.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D12511706F9500CDBC4D /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Spanish; path = Resources/Spanish.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D12611706F9500CDBC4D /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Resources/Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D12711706F9500CDBC4D /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Resources/Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D12711706F9500CDBC4D /* Spanish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Spanish; path = Resources/Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D12811706F9500CDBC4D /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Resources/Spanish.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D12911706F9500CDBC4D /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Resources/Spanish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D12A11706F9C00CDBC4D /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Swedish; path = Resources/Swedish.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D12B11706F9C00CDBC4D /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Swedish; path = Resources/Swedish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D12C11706F9C00CDBC4D /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Swedish; path = Resources/Swedish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D12C11706F9C00CDBC4D /* Swedish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Swedish; path = Resources/Swedish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D12D11706F9C00CDBC4D /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Resources/Swedish.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D12E11706F9C00CDBC4D /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Resources/Swedish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B8F0DF06FAF23900107815 /* WMATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WMATagger.h; path = src/WMATagger.h; sourceTree = "<group>"; };
@@ -737,12 +735,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				797954D0142E05A200FDA262 /* libtaglib.a in Frameworks */,
+				797954D1142E05A200FDA262 /* libusb.a in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				7936C0B006B6C67200C6514A /* IOKit.framework in Frameworks */,
 				7987CE0806F5D428000FF83F /* libz.1.dylib in Frameworks */,
-				793B6F240825671000A43F5B /* libusb.a in Frameworks */,
 				7948DB950AB0522400ABAFEF /* libiconv.2.dylib in Frameworks */,
-				79740B0B0F6C3AB50075149C /* libtaglib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,7 +982,6 @@
 				797F80F70AA496AB0085146E /* gphoto2-endian.h */,
 				797F80F80AA496AB0085146E /* libmtp.c */,
 				797F80F90AA496AB0085146E /* libmtp.h */,
-				797F80FA0AA496AB0085146E /* libptp-stdint.h */,
 				797F80FB0AA496AB0085146E /* libusb-glue.c */,
 				797F80FC0AA496AB0085146E /* libusb-glue.h */,
 				7989957A0E58114C00037F32 /* playlist-spl.h */,
@@ -1493,7 +1490,6 @@
 				797F80F60AA496680085146E /* config.h in Headers */,
 				797F81040AA496AB0085146E /* gphoto2-endian.h in Headers */,
 				797F81060AA496AB0085146E /* libmtp.h in Headers */,
-				797F81070AA496AB0085146E /* libptp-stdint.h in Headers */,
 				797F81090AA496AB0085146E /* libusb-glue.h in Headers */,
 				797F810C0AA496AB0085146E /* ptp.h in Headers */,
 				797F810E0AA496AB0085146E /* unicode.h in Headers */,
@@ -1569,6 +1565,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = 79486343085DDBD7006A5794 /* Build configuration list for PBXProject "XNJB" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -1905,13 +1904,11 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = 4.2;
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.6;
 				OTHER_CFLAGS = "";
-				SDKROOT = macosx10.5;
-				"SDKROOT[arch=i386]" = macosx10.5;
-				"SDKROOT[arch=ppc]" = macosx10.5;
+				SDKROOT = macosx10.6;
+				"SDKROOT[arch=*]" = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Development;
@@ -1926,7 +1923,6 @@
 					"$(SRCROOT)/build/Development",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_FORCE_CPU_SUBTYPE_ALL = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -1935,6 +1931,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -1946,14 +1943,14 @@
 					"\"$(SRCROOT)/build/Development\"",
 				);
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DHAVE_ICONV";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = XNJB;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.6;
 				SECTORDER_FLAGS = "";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/build/Deployment Debug\" \"$(SRCROOT)/build/Development\"";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -1967,25 +1964,24 @@
 		793A84010D2FB03C00076F70 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = usb;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.6;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -2001,18 +1997,17 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = usb;
 				SECTORDER_FLAGS = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -2030,12 +2025,12 @@
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = usb;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -2057,13 +2052,13 @@
 					"$(SRCROOT)/build/Development",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
@@ -2078,14 +2073,13 @@
 					"\"$(SRCROOT)/build/Development\"",
 				);
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-DHAVE_ICONV";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = XNJB;
 				SECTORDER_FLAGS = "";
 				STRIP_INSTALLED_PRODUCT = YES;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/build/Deployment Debug\" \"$(SRCROOT)/build/Development\"";
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -2105,11 +2099,12 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(SRCROOT)/build/Development",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "$(SRCROOT)/../ID3.framework/id3\\ tag\\ framework/ID3/build/Development";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "";
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -2117,16 +2112,18 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/richard/njb/XNJB/libs,
-					/Users/richard/njb/XNJB/build,
-					/Users/richard/njb/XNJB,
+					/Users/richard/njb/hg/xnjb.hg/libs,
+					/Users/richard/njb/hg/xnjb.hg/build,
+					/Users/richard/njb/hg/xnjb.hg,
 					"\"$(SRCROOT)/build/Deployment Debug\"",
 					"\"$(SRCROOT)/build/Development\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = XNJB;
 				SECTORDER_FLAGS = "";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/build/Deployment Debug\" \"$(SRCROOT)/build/Development\"";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -2152,14 +2149,12 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				"MACOSX_DEPLOYMENT_TARGET[arch=*]" = 10.6;
 				OTHER_CFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				SDKROOT = macosx10.5;
-				"SDKROOT[arch=i386]" = macosx10.5;
-				"SDKROOT[arch=ppc]" = macosx10.5;
+				SDKROOT = macosx10.6;
+				"SDKROOT[arch=*]" = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Deployment;
@@ -2167,8 +2162,8 @@
 		79486346085DDBD7006A5794 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = macosx10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx10.6;
 			};
 			name = Default;
 		};
@@ -2176,20 +2171,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = usb;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -2209,12 +2203,12 @@
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(SRCROOT)/build/Development",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -2228,8 +2222,7 @@
 					"\"$(SRCROOT)/build/Development\"",
 				);
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = (
 					"-DXNJB_LIBMTP_DEBUG",
 					"-DHAVE_ICONV",
@@ -2237,6 +2230,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = XNJB;
 				SECTORDER_FLAGS = "";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/build/Deployment Debug\" \"$(SRCROOT)/build/Development\"";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -2253,19 +2247,16 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = stabs;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_FAST_OBJC_DISPATCH = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = 4.2;
 				LIBRARY_STYLE = STATIC;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
-				SDKROOT = macosx10.5;
-				"SDKROOT[arch=i386]" = macosx10.5;
-				"SDKROOT[arch=ppc]" = macosx10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				"MACOSX_DEPLOYMENT_TARGET[arch=*]" = 10.6;
+				SDKROOT = macosx10.6;
+				"SDKROOT[arch=*]" = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = "Deployment Debug";
@@ -2276,7 +2267,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -2284,6 +2274,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/QtCore.framework/Versions/4/Headers,
 					/usr/include/QtCore,
@@ -2299,7 +2290,6 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_CFLAGS = "-DWITH_MP4";
-				PREBINDING = NO;
 				PRODUCT_NAME = taglib;
 				STRIP_INSTALLED_PRODUCT = NO;
 				ZERO_LINK = NO;
@@ -2310,13 +2300,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/QtCore.framework/Versions/4/Headers,
 					/usr/include/QtCore,
@@ -2333,7 +2323,6 @@
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_CFLAGS = "-DWITH_MP4";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = taglib;
 			};
 			name = "Deployment Debug";
@@ -2342,11 +2331,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_SYMBOL_SEPARATION = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
@@ -2354,6 +2342,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/QtCore.framework/Versions/4/Headers,
 					/usr/include/QtCore,
@@ -2368,13 +2357,12 @@
 					"/usr/local/Qt4.5/mkspecs/macx-xcode",
 				);
 				INSTALL_PATH = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DWITH_MP4";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = taglib;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.6;
 			};
 			name = Development;
 		};
@@ -2382,16 +2370,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = taglib;
 			};
 			name = Default;
