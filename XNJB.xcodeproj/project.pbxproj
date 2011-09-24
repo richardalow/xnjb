@@ -497,7 +497,7 @@
 		79B7D0F211706F2400CDBC4D /* Bulgarian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Bulgarian; path = Resources/Bulgarian.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D0F811706F3400CDBC4D /* Danish */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Danish; path = Resources/Danish.lproj/Credits.html; sourceTree = "<group>"; };
 		79B7D0F911706F3400CDBC4D /* Danish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Danish; path = Resources/Danish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		79B7D0FA11706F3400CDBC4D /* Danish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Danish; path = Resources/Danish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79B7D0FA11706F3400CDBC4D /* Danish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Danish; path = Resources/Danish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79B7D0FB11706F3400CDBC4D /* Danish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Danish; path = Resources/Danish.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		79B7D0FC11706F3400CDBC4D /* Danish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Danish; path = Resources/Danish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B7D0FF11706F4000CDBC4D /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Dutch; path = Resources/Dutch.lproj/Credits.html; sourceTree = "<group>"; };
