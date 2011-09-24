@@ -144,42 +144,51 @@
 		case LIBMTP_FILETYPE_FIRMWARE:
 			return @"firmware";
 			break;
-    case LIBMTP_FILETYPE_AAC:
-      return @"AAC";
-      break;
-    case LIBMTP_FILETYPE_MEDIACARD:
-      return @"Mediacard";
-      break;
-    case LIBMTP_FILETYPE_FLAC:
-      return @"FLAC";
-      break;
-    case LIBMTP_FILETYPE_MP2:
-      return @"MP2";
-      break;
-    case LIBMTP_FILETYPE_M4A:
-      return @"M4A";
-      break;
-    case LIBMTP_FILETYPE_DOC:
-      return @"DOC";
-      break;
-    case LIBMTP_FILETYPE_XML:
-      return @"XML";
-      break;
-    case LIBMTP_FILETYPE_XLS:
-      return @"XLS";
-      break;
-    case LIBMTP_FILETYPE_PPT:
-      return @"PPT";
-      break;
-    case LIBMTP_FILETYPE_MHT:
-      return @"MHT";
-      break;
-    case LIBMTP_FILETYPE_JP2:
-      return @"JP2";
-      break;
-    case LIBMTP_FILETYPE_JPX:
-      return @"JPX";
-      break;
+		case LIBMTP_FILETYPE_AAC:
+			return @"AAC";
+			break;
+		case LIBMTP_FILETYPE_MEDIACARD:
+			return @"Mediacard";
+			break;
+		case LIBMTP_FILETYPE_FLAC:
+			return @"FLAC";
+			break;
+		case LIBMTP_FILETYPE_MP2:
+			return @"MP2";
+			break;
+		case LIBMTP_FILETYPE_M4A:
+			return @"M4A";
+			break;
+		case LIBMTP_FILETYPE_DOC:
+			return @"DOC";
+			break;
+		case LIBMTP_FILETYPE_XML:
+			return @"XML";
+			break;
+		case LIBMTP_FILETYPE_XLS:
+			return @"XLS";
+			break;
+		case LIBMTP_FILETYPE_PPT:
+			return @"PPT";
+			break;
+		case LIBMTP_FILETYPE_MHT:
+			return @"MHT";
+			break;
+		case LIBMTP_FILETYPE_JP2:
+			return @"JP2";
+			break;
+		case LIBMTP_FILETYPE_JPX:
+			return @"JPX";
+			break;
+		case LIBMTP_FILETYPE_FOLDER:
+			return @"FOLDER";
+			break;
+		case LIBMTP_FILETYPE_ALBUM:
+			return @"ALBUM";
+			break;
+		case LIBMTP_FILETYPE_PLAYLIST:
+			return @"PLAYLIST";
+			break;
 	}
 	// we can't ever get here...
 	NSLog(@"invalid libmtp file type %d", fileType);
