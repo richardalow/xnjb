@@ -3,3 +3,4 @@ syntax: glob
 build/*
 XNJB.xcodeproj/richard.*
 *.orig
+XNJB.xcodeproj/project.xcworkspace/xcuserdata/*
