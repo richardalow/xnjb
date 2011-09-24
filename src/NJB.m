@@ -746,35 +746,34 @@ io_iterator_t deviceAddedIter;
     
 		if (LIBMTP_Send_Track_From_File(device, filename, trackmeta, mtp_progress, &progressParams) != 0)
 		{
-      LIBMTP_error_t *errorStack = LIBMTP_Get_Errorstack(device);
-      if (errorStack != NULL)
-      {
-        if (errorStack->errornumber == LIBMTP_ERROR_CANCELLED)
-        {
-          sleep(1);
-          
-          return [[[NJBTransactionResult alloc] initWithSuccess:YES
+			LIBMTP_error_t *errorStack = LIBMTP_Get_Errorstack(device);
+			if (errorStack != NULL)
+			{
+				if (errorStack->errornumber == LIBMTP_ERROR_CANCELLED)
+				{
+					sleep(1);
+					return [[[NJBTransactionResult alloc] initWithSuccess:YES
                                                    resultString:NSLocalizedString(@"Cancelled", nil)] autorelease];	
-        }
-      }
+				}
+			}
 			NSString *error = @"Error uploading file";
 			NSLog(error);
-      NSString *errorString = [self njbErrorString];
-      NSLog(errorString);
+			NSString *errorString = [self njbErrorString];
+			NSLog(errorString);
 			LIBMTP_destroy_track_t(trackmeta);
 			return [[[NJBTransactionResult alloc] initWithSuccess:NO resultString:error extendedErrorString:errorString] autorelease];
 		}
 		
 		[track setItemID:trackmeta->item_id];
     
-    if (createAlbumFiles)
-    {
-      Album *album = [self addTrack:track ToAlbumWithName:[track album]];
-      if (uploadAlbumArt)
-        [self uploadAlbumArt:[track image] forAlbum:album];
-    }
-		
-		 LIBMTP_destroy_track_t(trackmeta);
+		if (createAlbumFiles)
+		{
+			Album *album = [self addTrack:track ToAlbumWithName:[track album]];
+			if (uploadAlbumArt)
+				[self uploadAlbumArt:[track image] forAlbum:album];
+		}
+
+		LIBMTP_destroy_track_t(trackmeta);
 	}
 	
 	double time = -[date timeIntervalSinceNow];
@@ -784,16 +783,14 @@ io_iterator_t deviceAddedIter;
 	[self updateDiskSpace];
 	
 	// update my cache
-  // TODO: should we do this?
-  [track setImage:nil];
-  [track setItcFilePath:@""];
+	// TODO: should we do this?
+	[track setImage:nil];
+	[track setItcFilePath:@""];
 	[cachedTrackList addObject:track];
 	// tell others the track list has changed
 	[statusDisplayer postNotificationName:NOTIFICATION_TRACK_LIST_MODIFIED object:self];
 	
-	return [[[NJBTransactionResult alloc] initWithSuccess:YES
-																					 resultString:[NSString stringWithFormat:NSLocalizedString(@"Speed %@ Mbps", nil), [self rateString:rate]]] autorelease];
-		
+	return [[[NJBTransactionResult alloc] initWithSuccess:YES resultString:[NSString stringWithFormat:NSLocalizedString(@"Speed %@ Mbps", nil), [self rateString:rate]]] autorelease];
 }
 
 - (NJBTransactionResult *)deleteTrack:(Track *)track
@@ -816,62 +813,61 @@ io_iterator_t deviceAddedIter;
 		{
 			NSString *error = @"error deleting track";
 			NSLog(error);
-      NSString *errorString = [self njbErrorString];
-      NSLog(errorString);
-      return [[[NJBTransactionResult alloc] initWithSuccess:NO resultString:error extendedErrorString:errorString] autorelease];
+			NSString *errorString = [self njbErrorString];
+			NSLog(errorString);
+			return [[[NJBTransactionResult alloc] initWithSuccess:NO resultString:error extendedErrorString:errorString] autorelease];
 		}
     
-    // TODO: we should delete from playlists too
+		// TODO: we should delete from playlists too
     
-    // delete from album
-    if (![[track album] isEqualToString:@""])
-    {
-      if (albums == nil)
-        [self downloadAlbumList];
+		// delete from album
+		if (![[track album] isEqualToString:@""])
+		{
+			if (albums == nil)
+				[self downloadAlbumList];
         
-      Album *album;
-      NSEnumerator *albumEnumerator = [albums objectEnumerator];
+			Album *album;
+			NSEnumerator *albumEnumerator = [albums objectEnumerator];
   
-      while (album = [albumEnumerator nextObject])
-      {
-        if ([[album name] caseInsensitiveCompare:[track album]] == NSOrderedSame)
-          break;
-      }
+			while (album = [albumEnumerator nextObject])
+			{
+				if ([[album name] caseInsensitiveCompare:[track album]] == NSOrderedSame)
+					break;
+			}
       
-      if (album != nil)
-      {
-        NSLog(@"deleting track from album");
+			if (album != nil)
+			{
+				NSLog(@"deleting track from album");
         
-        [album deleteTrackWithID:[track itemID]];
-        if ([album trackCount] == 0)
-        {
-          NSLog(@"deleting empty album with id %d", [album albumID]);
-          // delete empty albums
-          if (LIBMTP_Delete_Object(device, [album albumID]) != 0)
-          {
-            NSString *error = @"error deleting album file";
-            NSLog(error);
-            NSString *errorString = [self njbErrorString];
-            NSLog(errorString);
-          }
-          [albums removeObject:album];
-        }
-        else
-        {
-          LIBMTP_album_t *libmtpAlbum = [album toLIBMTPAlbum:track];
+				[album deleteTrackWithID:[track itemID]];
+				if ([album trackCount] == 0)
+				{
+					NSLog(@"deleting empty album with id %d", [album albumID]);
+					// delete empty albums
+					if (LIBMTP_Delete_Object(device, [album albumID]) != 0)
+					{
+						NSString *error = @"error deleting album file";
+						NSLog(error);
+						NSString *errorString = [self njbErrorString];
+						NSLog(errorString);
+					}
+					[albums removeObject:album];
+				}
+				else
+				{
+					LIBMTP_album_t *libmtpAlbum = [album toLIBMTPAlbum:track];
           
-          if (LIBMTP_Update_Album(device, libmtpAlbum) != 0)
-          {
-            NSLog(@"Could not update album");
-            NSString *errorString = [self njbErrorString];
-            NSLog(errorString);
-          }
-          
-          LIBMTP_destroy_album_t(libmtpAlbum);
-        }
-      }
-    }
-  
+					if (LIBMTP_Update_Album(device, libmtpAlbum) != 0)
+					{
+						NSLog(@"Could not update album");
+						NSString *errorString = [self njbErrorString];
+						NSLog(errorString);
+					}
+
+					LIBMTP_destroy_album_t(libmtpAlbum);
+				}
+			}
+		}
 	}
 	
 	[self updateDiskSpace];
@@ -908,7 +904,7 @@ io_iterator_t deviceAddedIter;
 		{
 			NSString *error = @"error deleting file";
 			NSLog(error);
-      NSString *errorString = [self njbErrorString];
+            NSString *errorString = [self njbErrorString];
       NSLog(errorString);
       return [[[NJBTransactionResult alloc] initWithSuccess:NO resultString:error extendedErrorString:errorString] autorelease];
 		}
