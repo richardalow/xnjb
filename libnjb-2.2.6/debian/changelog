@@ -1,0 +1,86 @@
+libnjb (2.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * New upstream library version: 5:0:0. Upstream confirmed this release is
+    binary compatible so changed this to 5:0:1, which is the same as 4.1.0.
+  * Prepend njb_ to the generically named man pages (closes: #302858).
+
+ -- Shaun Jackman <sjackman@debian.org>  Tue, 10 May 2005 09:49:08 -0700
+
+libnjb (2.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bump the SOVERSION to 4:0:0.
+  * Add libnjb-hotplug (closes: #295944).
+  * Add the HTML Doxygen documentation to libnjb-doc.
+
+ -- Shaun Jackman <sjackman@debian.org>  Thu,  3 Mar 2005 08:47:39 -0800
+
+libnjb (1.2.20041210-1) experimental; urgency=low
+
+  * New upstream release.
+  * Bump the SOVERSION to 3:0:0.
+
+ -- Shaun Jackman <sjackman@debian.org>  Sun, 26 Dec 2004 15:41:33 -0800
+
+libnjb (1.2-2) unstable; urgency=low
+
+  * Synopses were incorrect (closes: #287290). 
+
+ -- Shaun Jackman <sjackman@debian.org>  Sun, 26 Dec 2004 15:21:09 -0800
+
+libnjb (1.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bump the SOVERSION to 2:0:0.
+
+ -- Shaun Jackman <sjackman@debian.org>  Mon,  4 Oct 2004 16:19:16 -0700
+
+libnjb (1.1-3) unstable; urgency=low
+
+  * Fix libdir in libnjb.la. 
+
+ -- Shaun Jackman <sjackman@debian.org>  Mon, 28 Jun 2004 11:05:21 -0700
+
+libnjb (1.1-2) unstable; urgency=low
+
+  * Change Section to libdevel.
+
+ -- Shaun Jackman <sjackman@debian.org>  Wed, 26 May 2004 14:48:03 -0700
+
+libnjb (1.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Shaun Jackman <sjackman@debian.org>  Tue, 25 May 2004 13:06:10 -0700
+
+libnjb (1.0.1-2) unstable; urgency=low
+
+  * debian/rules: Remove dh_link (closes: #232976).
+
+ -- Shaun Jackman <sjackman@debian.org>  Thu, 19 Feb 2004 09:27:20 -0800
+
+libnjb (1.0.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Shaun Jackman <sjackman@debian.org>  Wed,  7 Jan 2004 15:13:08 -0800
+
+libnjb (0.9.1b-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Shaun Jackman <sjackman@debian.org>  Mon, 21 Oct 2002 11:57:10 -0700
+
+libnjb (0.9b-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Shaun Jackman <sjackman@debian.org>  Sun, 26 May 2002 20:05:35 -0700
+
+libnjb (0.8b-1) unstable; urgency=low
+
+  * Initial Release. (closes: #142276, #143332)
+
+ -- Shaun Jackman <sjackman@debian.org>  Sat,  6 Apr 2002 18:00:32 -0800
+

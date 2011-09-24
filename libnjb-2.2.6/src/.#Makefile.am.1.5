@@ -1,0 +1,19 @@
+lib_LTLIBRARIES=libnjb.la
+libnjb_la_SOURCES=base.c ioutil.c protocol.c procedure.c byteorder.c \
+	playlist.c usb_io.c njb_error.c datafile.c songid.c \
+	eax.c njbtime.c protocol3.c unicode.c \
+	base.h byteorder.h datafile.h defs.h eax.h ioutil.h njb_error.h \
+	njbtime.h njbusb.h playlist.h procedure.h protocol.h protocol3.h \
+	songid.h unicode.h usb_io.h
+include_HEADERS=libnjb.h
+EXTRA_DIST=libnjb.h.in
+
+# This is the version of the *library interface*, not the revision
+# of libnjb itself. Do not change this unless you're absolutely 
+# certain of what the difference is. (See the libtool manual,
+# section 6.3 (http://www.gnu.org/software/libtool/manual.html)
+CURRENT=6
+REVISION=0
+AGE=1
+SOVERSION=$(CURRENT):$(REVISION):$(AGE)
+LDFLAGS=@LDFLAGS@ -version-info $(SOVERSION)

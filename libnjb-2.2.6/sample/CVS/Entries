@@ -1,0 +1,26 @@
+/.cvsignore/1.11/Fri Dec 22 09:51:21 2006//
+/Makefile.am/1.5/Fri Dec 22 09:51:21 2006//
+/common.h/1.1/Fri Dec 22 09:51:21 2006//
+/cursesplay.c/1.6/Fri Dec 22 09:51:21 2006//
+/delfile.c/1.10/Fri Dec 22 09:51:21 2006//
+/deltr.c/1.13/Fri Dec 22 09:51:21 2006//
+/dumpeax.c/1.16/Fri Dec 22 09:51:21 2006//
+/dumptime.c/1.9/Fri Dec 22 09:51:21 2006//
+/files.c/1.11/Fri Dec 22 09:51:21 2006//
+/fwupgrade.c/1.7/Fri Dec 22 09:51:21 2006//
+/getfile.c/1.12/Fri Dec 22 09:51:21 2006//
+/getowner.c/1.10/Fri Dec 22 09:51:21 2006//
+/gettr.c/1.19/Thu Sep  6 18:39:58 2007//
+/getusage.c/1.12/Fri Dec 22 09:51:21 2006//
+/handshake.c/1.40/Fri Dec 22 09:51:21 2006//
+/pl.c/1.14/Fri Dec 22 09:51:21 2006//
+/play.c/1.12/Fri Dec 22 09:51:21 2006//
+/playlists.c/1.15/Fri Dec 22 09:51:21 2006//
+/sendfile.c/1.17/Fri Dec 22 09:51:21 2006//
+/sendtr.c/1.23/Thu Sep  6 18:39:59 2007//
+/setowner.c/1.9/Fri Dec 22 09:51:21 2006//
+/setpbm.c/1.10/Fri Dec 22 09:51:21 2006//
+/settime.c/1.9/Fri Dec 22 09:51:21 2006//
+/tagtr.c/1.13/Fri Dec 22 09:51:21 2006//
+/tracks.c/1.18/Fri Dec 22 09:51:21 2006//
+D

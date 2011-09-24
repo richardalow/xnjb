@@ -1,0 +1,23 @@
+D/debian////
+D/sample////
+D/src////
+D/doc////
+D/windows////
+/.cvsignore/1.11/Fri Dec 22 09:51:21 2006//
+/AUTHORS/1.11/Fri Dec 22 09:51:21 2006//
+/ChangeLog/1.70/Thu Sep  6 18:38:53 2007//
+/ChangeLog-old/1.1/Fri Dec 22 09:51:21 2006//
+/FAQ/1.7/Fri Dec 22 09:51:21 2006//
+/HACKING/1.59/Thu Sep  6 18:38:53 2007//
+/INSTALL/1.29/Thu Sep  6 18:38:53 2007//
+/LICENSE/1.1.1.1/Fri Dec 22 09:51:21 2006//
+/Makefile.am/1.8/Thu Sep  6 18:38:54 2007//
+/README/1.39/Thu Sep  6 18:38:54 2007//
+/autogen.sh/1.5/Fri Dec 22 09:51:21 2006//
+/configure.ac/1.17/Thu Sep  6 18:38:54 2007//
+/hotplug.sh.in/1.7/Thu Sep  6 18:38:55 2007//
+/libnjb.fdi/1.1/Tue Jun  5 00:02:55 2007//
+/libnjb.pc.in/1.2/Fri Dec 22 09:51:21 2006//
+/nomad.rules/1.8/Wed Sep  5 21:36:00 2007//
+/nomad.usermap/1.13/Thu Sep  6 18:38:55 2007//
+/nomadjukebox.in/1.5/Fri Dec 22 09:51:21 2006//

@@ -1,0 +1,15 @@
+# libnjb pkg-config source file
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libnjb
+Description: libnjb is a library for accessing Creative Labs Nomad Jukeboxes
+Version: @VERSION@
+Requires:
+Conflicts:
+# libnjb nowadays always use libusb
+Libs: -L${libdir} -lnjb @LIBS@
+Cflags: -I${includedir} @OSFLAGS@

@@ -1,0 +1,3 @@
+asffile.lo .libs/asffile.o: asffile.cpp ../../config.h
+
+../../config.h:

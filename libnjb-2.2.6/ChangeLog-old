@@ -1,0 +1,609 @@
+Changes since v1.2:
+
+	Wrapping upp the Windows support.
+
+	Documentation in JavaDoc/Doxygen format.
+
+	Added NJB_Playlist_Deltrack_TrackID(playlist_t *pl, u_int32_t trackid);
+	for removing a track by track ID.
+
+	Fixed some bad codec string related things.
+
+	Added NJB_Send_Firmware() function which is totally and
+	disastrously dangerous. But it may be used if you have the
+	guts. It is not even tested!
+
+	Some internal cleanup of duplicate code in protocol3.c
+
+	Cleaned up the EAX API (much better) after remarks from 
+	David.
+
+	Revamped the bitmap setting API into two functions, one
+	for getting the dimensions and one for setting the bitmap.
+
+	Fixed a bug renaming CODEC frame to "x.temp" to no avail
+	on series 3 devices.
+
+	Added a NJB_Get_NJB1_Libcounter() function to retrieve the
+	NJB1 library counter.
+
+	Fixed bug in WMA tag write.
+
+	EAX crash on reading the second time fixed.
+
+	New functionality:
+
+	Added a libusb-based check for correct endpoints. Using these to
+	determine how to talk to the device.
+
+	Added Jukebox Zen Micro support. It is said to work.
+
+	Added Dell Pocket DJ support too.
+
+	Added Generation 2 Dell DJ support. It is also said to work.
+
+	We have made massive documentation of the interface and library
+	using Doxygen, the docs will be published on the web.
+
+
+	NJB error report interface changes:
+
+	All functions need an extra NJB object pointer because error stacks
+	are no longer global but local to each device object. This makes us
+	thread safe, which is good.
+	
+	The global external variable "extern int njb_error" is gone for
+	natural reasons. Remove any references from your source code.
+	If you want to see if an error has occured, do not check "njb_error"
+	anymore, instead use the NJB_Error_Penfing(njb_t *njb) function
+	which return non-zero if there is one or more queued errors.
+
+	Example:
+
+	if (NJB_Error_Pending(njb)) {
+	   NJB_Error_Dump(njb,stderr);
+	}
+
+	njb_error_reset_geterror() has been renamed NJB_Error_Reset_Geterror()
+	for clarity.
+
+	njb_error_geterror() has been renamed NJB_Error_Geterror() for clarity.
+
+	njb_error_string() has been removed from the public API. There is no
+	way for external applications to retrieve the error number anyway!
+	The EO_* error codes were moved into the njb_error.h file for the
+	same reason.
+
+	njb_error_dump() has been renamed NJB_Error_Dump() for clarity.
+
+
+	NJB playlist interface changes:
+
+	playlist_t has been renamed njb_playlist_t for clarity.
+
+	playlist_track_t has been renamed njb_playlist_track_t for 
+	clarity.
+
+	playlist_new() has been renamed NJB_Playlist_New() for clarity.
+
+	playlist_destroy() has been renamed NJB_Playlist_Destroy() for
+	clarity.
+
+	playlist_addtrack() has been renamed NJB_Playlist_Addtrack()
+	for clarity.
+
+	playlist_reset_gettrack() has been renamed NJB_Playlist_Reset_Gettrack()
+	for clarity.
+
+	playlist_gettrack() has been renamed NJB_Playlist_Gettrack()
+	for clarity.
+
+	playlist_set_name() has been renamed NJB_Playlist_Set_Name()
+	for clarity.
+
+	playlist_deltrack() has been renamed NJB_Playlist_Deltrack()
+	for clarity.
+
+	playlist_dump() has been removed - see the sample program "playlists.c"
+	for a typical reference implementation.
+
+	playlist_pack() and playlist_unpack() has been removed from the
+	public interface, these are private.
+
+	playlist_track_new() has been renamed NJB_Playlist_Track_New() for
+	clarity.
+
+	playlist_track_destroy() has been renamed NJB_Playlist_Track_Destroy()
+	for clarity.
+
+
+	NJB basic types changes:
+
+	The callback type XferCallback() has been renamed
+	NJB_Xfer_Callback() for clarity.
+
+	njblibctr_t has been removed from the public types and made
+	internal. It should never have been public in the first place
+	and it is not likely that you have been using it.
+
+	These fields:
+
+	unsigned char id[16];
+	char idstring[33];
+	u_int8_t fwMajor;
+	u_int8_t fwMinor;
+	u_int8_t fwRel;
+
+	have been removed from njb_t and moved into njb_id_t, reflecting the
+	identity properties of the currently connected jukebox.
+
+	NJB_Ping() no longer returns a (njbid_t *) struct pointer. Dereference
+	njb instead, e.g. njb->njbid
+
+
+	Datafile handling changes:
+
+	datafile_t has been renamed njb_datafile_t for clarity. The two
+	msdw and lsdw 32-bit size words have been merged into a true 64-bit
+	unsigned "filesize" attribute. It also has a "folder" and "flags" 
+	attribute, like so:
+
+	struct njb_datafile_struct {
+		char *filename;
+		char *folder;
+		u_int32_t timestamp;
+		u_int32_t flags;
+		u_int32_t dfid;
+		u_int64_t filesize;
+		njb_datafile_t *nextdf;
+	};
+
+	datafile_destroy() has been renamed NJB_Datafile_Destroy() for
+	clarity.
+
+	datafile_dump() has been retired. This functionality shall be 
+	provided by the enduser. See the "files.c" sample program for
+	an example of how to achieve the same functionality.
+
+	NJB_Create_Folder() can be used to create a new, empty folder in 
+	the jukebox datafilesystem.
+
+	NJB_Send_File() has an optional "folder" argument, which will
+	be set to "\" (root folder) if supplied with a NULL value.
+
+
+	The song data interface has been revamped:
+
+	songid_t has been renamed njb_songid_t for clarity. Replace on all 
+	occurances in your code.
+
+	songid_frame_t has been renamed njb_songid_frame_t for clarity.
+	Replace on all occurances in your code. The frame format has
+	changed considerably for clarity and portability, the old frame:
+
+          struct songid_frame_t {
+ 		u_int16_t type;
+        	u_int16_t labelsz;
+        	u_int16_t datasz;
+        	void *label;
+        	void *data;
+        	songid_frame_t *next;
+	  };
+
+          has been changed to:
+
+	  struct njb_songid_frame_t {
+		char *label; /* terminated string */
+		union {
+			char *strval;
+			u_int8_t u_int8_val;
+			u_int16_t u_int16_val;
+			u_int32_t u_int32_val;
+			u_int64_t u_int64_val;
+		} data;
+		njb_songid_frame_t *next;
+	  }
+
+	songid_new() has been renamed into NJB_Songid_New() for clarity.
+	Replace on all occurances in your code.
+
+	songid_destroy() has been renamed NJB_Songid_Destroy() for clarity.
+	Replace on all occurances in your code.
+
+	songid_addframe() has been renamed NJB_Songid_Addframe() for clarity.
+	Replace on all occurances in your code.
+
+	songid_reset_getframe() has been renamed NJB_Songid_Reset_Getframe()
+	for clarity. Replace on all occurances in your code.
+
+	songid_getframe() has been renamed NJB_Songid_Getframe() for clarity.
+	Replace on all occurances in your code.
+
+	songid_findframe() has been renamed NJB_Songid_Findframe() for clarity.
+	Replace on all occurances in your code.
+
+	songid_dump() has been removed from libnjb: this functionality shall
+	be implemented by the using application. Code performing what was
+	previously done by songid_dump() now exists inside the "tracks" sample
+	program (tracks.c).
+
+	songid_frame_dump() has been removed, removed for the same reason 
+	as the previous function.
+
+	songid_frame_new() has been replaced with NJB_Songid_Frame_New_Xxxx(). The
+	format of this function is different from what it used to be. It will
+	now only take the label and a value of the correct type as a parameter,
+	yielding the following five functions to us in its place:
+
+	NJB_Songid_Frame_New_String(char *label, char *value);
+	NJB_Songid_Frame_New_Uint8(char *label, u_int8_t value);
+	NJB_Songid_Frame_New_Uint16(char *label, u_int16_t value);
+	NJB_Songid_Frame_New_Uint32(char *label, u_int32_t value);
+	NJB_Songid_Frame_New_Uint64(char *label, u_int64_t value);
+
+	With the following 10 handy helper functions, which also help out in getting
+	the data types right:
+
+	NJB_Songid_Frame_New_Codec(char *codec);
+	NJB_Songid_Frame_New_Title(char *title);
+	NJB_Songid_Frame_New_Album(char *album);
+	NJB_Songid_Frame_New_Genre(char *genre);
+	NJB_Songid_Frame_New_Artist(char *artist);
+	NJB_Songid_Frame_New_Length(u_int16_t length);
+	NJB_Songid_Frame_New_Filesize(u_int32_t filesize);
+	NJB_Songid_Frame_New_Tracknum(u_int16_t tracknum);
+	NJB_Songid_Frame_New_Year(u_int16_t year);
+	NJB_Songid_Frame_New_Fname(char *fname);
+	NJB_Songid_Frame_New_Protected(u_int16_t protect);
+	
+	The following two are used with NJB1 only and are ignored on series 3 devices.
+
+	NJB_Songid_Frame_New_Bitrate(u_int32_t bitrate);
+	NJB_Songid_Frame_New_Comment(char *comment);
+
+	All macros such as songid_title(foo) have been retired. Use the above
+	functions instead.
+
+	songid_frame_destroy() has been renamed NJB_Songid_Frame_Destroy()
+	for clarity. Replace on all occurances in your code.
+
+	The NJB_Send_Track() and NJB_Replace_Track_Tag() functions only
+	take a njb_songid_t* struct as argument. The njb_songid_t struct
+	shall be created with other functions.
+
+        int NJB_Send_Track (njb_t *njb, const char *path, njb_songid_t *songid
+	                    XferCallback *njb_callback, void *data, u_int32_t *trackid);
+
+        int NJB_Replace_Track_Tag(njb_t *njb, u_int32_t trackid, njb_songid_t *songid);
+
+	Example: whereas you would earlier do something like:
+
+	if (NJB_Send_Track (njb, "foo.mp3", NJB_CODEC_MP3, "Title", "Album", "Genre",
+	                    "Artist", 123, 1, "2004", 0, NULL, NULL, &id) == -1) {
+	    njb_error_dump(stderr);
+	}
+
+	You will nowadays write the following (notice that setting the filesize and
+	filename is optional - if these are left out, libnjb will fill them in):
+
+	njb_songid_t *songid;
+	njb_songid_frame_t *frame;
+
+	songid = NJB_Songid_New();
+	frame = NJB_Songid_Frame_New_Codec(NJB_CODEC_MP3);
+	NJB_Songid_Addframe(songid, frame);
+	// This one is optional - libnjb will fill it in if not specified
+	frame = NJB_Songid_Frame_New_Filesize(12345678);
+	NJB_Songid_Addframe(songid, frame);
+	frame = NJB_Songid_Frame_New_Title("Title");
+	NJB_Songid_Addframe(songid, frame);
+	frame = NJB_Songid_Frame_New_Album("Album");
+	NJB_Songid_Addframe(songid, frame);
+	frame = NJB_Songid_Frame_New_Artist("Artist");
+	NJB_Songid_Addframe(songid, frame);
+	frame = NJB_Songid_Frame_New_Genre("Genre");
+	NJB_Songid_Addframe(songid, frame);
+	frame = NJB_Songid_Frame_New_Year(2004);
+	NJB_Songid_Addframe(songid, frame);
+	frame = NJB_Songid_Frame_New_Tracknum(1);
+	NJB_Songid_Addframe(songid, frame);
+	frame = NJB_Songid_Frame_New_Length(123);
+	NJB_Songid_Addframe(songid, frame);
+	// This one is optional - libnjb will fill it in if not specified
+	frame = NJB_Songid_Frame_New_Filename("Foo.mp3");
+	NJB_Songid_Addframe(songid, frame);
+	if (NJB_Send_Track (njb, "foo.mp3", songid, NULL, NULL, &id) == -1) {
+	    njb_error_dump(stderr);
+	}
+	NJB_Songid_Destroy(songid);
+
+	When using NJB_Replace_Track_Tag() filesize and filename will have to
+	be specified in the songid tag.
+
+	The new, lengthy style is made to make the tags more extensible without
+	having to change the NJB_Send_Track() interface, and more closely
+	resemple the interface used when reading tracks or updating tags.
+
+	The Old EAX API has been retired. The following changes apply:
+
+	NJB_Adjust_Sound() has been retired. Use NJB_Adjust_EAX() 
+	instead.
+
+	NJB_Get_EAX () has been retired. Use NJB_Get_EAX_Type() instead.
+
+	NJB_Refresh_EAX () has been retired. Use NJB_Get_EAX_Type() instead.
+
+	void eax_destroy() has been retired. Use NJB_Destroy_EAX_Type() 
+	instead.
+
+	eax_t had been retired. Use njb_eax_t with the functions above 
+	instead.
+
+Changes since v1.1:
+
+	Fixed a bug that was subtracting three characters from
+	all files transfered to NJB1.
+
+	Added support for the Nomad Jukebox Zen Touch.
+
+	New EAX API based on the NJB_Reset_Get_EAX_Type()
+	and NJB_Get_EAX_Type() calls returning
+	(njb_eax_type_t *) records. See the "dumpeax" sample
+	program for an example.
+
+	More error handling for series 3-devices.
+
+	A number of endianness issues on the Mac were fixed.
+
+	Fixed cancel for transfer from host to NJB3 series:
+	partial file is deleted on cancelled transfer.
+
+	Support for Unicode on NJB1, using UNI_* tags, as
+	used by some other software. (Only reading.) We still
+	don't know what program it is that write these tags.
+
+	Libnjb builds successfully under Microsoft Windows
+	using the MinGW32 compiler and libusb-win32.
+
+	Added support for the pkg-config script by adding a 
+	libnjb.pc entry in $(prefix)/lib/pkgconfig. To
+	compile a libnjb program, just write:
+
+	gcc -o foo `pkg-config --cflags --libs libnjb` foo.c
+
+	This also simplifies compilation using autoconf and 
+	pkg-config: just write e.g.
+
+	PKG_CHECK_MODULES(NJB, libnjb)
+	AC_SUBST(NJB_CFLAGS)
+	AC_SUBST(NJB_LIBS)
+
+	To have libnjb LIBS and CFLAGS defined. Needless to say,
+	this will only work if you have pkgconfig installed on your
+	system, but most people have nowadays.
+
+	Removed the use of temporary file when retrieveing a file
+	from the device: retrieved file is written immediately to
+	target, and target is deleted on failure. The NJB_Set_TmpDir()
+	and NJB_Get_TmpDir() removed in accordance with this change.
+
+Changes since v1.0.1:
+
+	Fixed a bug in the njb3_set_time() function - it wasn't
+	reading back the status value after the operation.
+
+	Rewrote the metadata scanner to make it more generic, also
+	unified the NJB1 and NJB3-series code for sending files,
+	and allowing for short writes to occur on NJB3-series 
+	devices.
+
+	Added reading of device keys by default. Probably useful
+	for something yet to be disclosed.
+
+	Changed the playlist fill-in routine so that track ID:s
+	less than 0 are not returned. The typical value
+	0xfffffffe (-2) is a placeholder for lost tracks.
+
+	Unicode length detection feature for extended character
+	sets was bugged. Fixed by Friso Brugmans.
+
+	Refactored metadata handling code for series 3 devices
+	yet once more. This time it is even closer to the way it
+	should work, and rid even more bugs. Notably libnjb could
+	not handle a very large collection of playlists before this.
+
+	Added MacOS X compilation support under GCC. Switched to
+	libtool to handle this efficiently.
+
+	Long awaited bug fix that handles corrupted playlists. These
+	appear when you create a playlist and remove all the tracks
+	that were part of this playlist from the jukebox. It will 
+	then report as "a playlist containing tracks" whereas indeed
+	it is not.
+
+	Added support for Dell Digital DJ
+
+	Improved track transfer routines JB -> Host direction to be
+	more archaic.
+
+Changes since v0.9b:
+
+	Updated the build documentation for BSD.
+
+	Updated source code to compile under FreeBSD 4.6-RELEASE and
+	higher (accounting for struct changes in dev/usb/usb.h)
+
+	Added basic stuff for slowly emerging Nomad Jukebox 3
+	integration: added a property njb_t so that you can check
+	which jukebox is connected with njb->device_type (possible
+	values NJB_DEVICE_NJB1 and NJB_DEVICE_NJB3) where appropriate.
+
+	Added support for NJB_Discover, NJB_Open, NJB_Close,
+	NJB_Handshake so that integration with older programs will
+	work seamlessly.
+
+	Added support for NJB_Ping, NJB_Get_Owner_String,
+	NJB_Set_Owner_String, NJB_Get_Disk_Usage and NJB_Get_Time 
+	to have something to start with.
+
+	Device specific code goes into protocol.c and protocol3.c.
+	Function specific code goes into eg time.c, and generic
+	callbacks in procedure.c. Commands that differ subtantially
+	may be defined as NJ3_Foo in procedure.c, eg for track
+	listing and metadata change this may be necessary. The user
+	may then write jukebox-specific code by detecting the
+	value in njb->device_type.
+
+	I decided against a specific njb3.c file as it is better to
+	put everything njb3 protocol related into protocol3.c as
+	of now, as static functions.
+
+	Added support for reading the tracklist, NJB_Get_Track_Tag()
+	now works beutifully on NJB3.
+
+	Added support to NJB_Get_Track with some kind of callback
+	which does not give access to any buffer (what was that
+	actually for?). Getting tracks off the jukebox now actually
+	works, though it's a bit hacky.
+
+	Getting tracks is finished, and so is NJB_Send_Track().
+	You may start using libnjb for putting and getting tracks
+	on NJB3 devices. The first track ever transferred using
+	the NJB3 part of the library was "Covenant - Call the ships
+	to port".
+
+	Fixed NJB_Delete_Track() and NJB_Replace_Track_Tag()
+	NJB_Get_Playlist() and a bug in NJB_Get_Track_Tag().
+	Fixed NJB_Delete_Playlist(), NJB_Rename_Playlist(). All
+	for NJB3.
+
+	Added full unicode support, that will be enabled by calling
+	the library function NJB_Set_Unicode() with (preferably)
+	the argument NJB_UC_UTF8, or any other character mode that
+	you want to implement. (UTF8 should be good for all.)
+
+	Implemented datafile transfer functions for NJB3 more or
+	less - still some problems left. Transfering data files
+	off the jukebox will still not work.
+
+	Only playback functions and EAX remain to be fixed for the
+	NJB3.
+
+	Added detection for NJB2. Assuming its protocol to be
+	identical to NJB3's.
+	
+	Added detection for NJB ZEN. Assuming its protocol to
+	be identical to NJB3's.
+
+	Uncertain of the BSD part of these device detections.
+	The detection code in base.c is especially ugly in the
+	BSD case.
+
+	Added a set time patch for NJB3/2/ZEN from Ben Levitt.
+
+	Added detection and preliminary support for NJB Zen NX.
+
+	Added detection and preliminary support for NJB Zen Xtra.
+
+	INTERFACE INCOMPATIBLE CHANGES
+	------------------------------
+
+	Added several patches from David A. Knight adding
+	a void data pointer to several calls, for suppling a
+	user-defined pointer, so that a user program may 
+	determine which device provided a particular callback
+	call. Those who do not want to use it may use
+	NULL in this placeholder. Affected functions:
+
+	NJB_Get_Track
+	NJB_Send_Track
+	NJB_Get_File
+	NJB_Send_File
+
+	Another incompatibility comes from adding YEAR and
+	PlayOnly metadata tags in the following functions:
+
+	NJB_Send_Track
+	NJB_Replace_Track_Tag
+
+	PlayOnly set to "1" means that the track is protected
+	and cannot be copied off the jukebox.
+
+	2003-01-11
+
+	ZEN patches from Dwight Engen, suspect that these will
+	be the same for NJB2/3, but keeping them separate as of
+	now.
+
+	2003-03-18
+
+	Several NJB2 patches from Bernie.
+
+	2003-10-10
+
+	Previously added Nomad Zen USB 2.0 support
+	Added Nomad Zen NX support
+
+Changes since v0.8b:
+
+	Fixed memory leaks in protocol.c - raw EAX data was not
+	freed, dangerous freeing of null pointer on error removed
+	things should be OK now.
+
+	Added the commands NJB_Get_Time() and NJB_Set_Time() which
+	are currently undocumented in the protocol spec. Added
+	the sample programs "dumptime" and "settime" to illustrate
+	the new functionality.
+
+	Added shared library (.so) support.
+
+	Added NJB_Refresh_EAX command support, which is currently
+	undocumented in the protocol spec.
+
+	Added an explict NJB_Ping() command that e.g. can provide
+	the user with firmware revision number and power connection
+	status.
+
+	Added -Wall and -Wmissing-prototypes to Makefiles and tweaked
+	code to build cleanly with these options.
+
+Changes since v0.7b:
+
+	Added CHANGES file.  This was long overdue.
+
+	Added suport for "queue already empty" error (submitted by Linus
+	Walleij).
+
+	Added NJB_Replace_Track_Tag (Linus Walleij, with modifications).
+
+	Fixed boundary errors in njb_get_track_tag and njb_get_playlist.
+
+	Updated sample programs to support runtime debug output via -D.
+
+	Added "tagtr" sample program (changes the tag of a track stored
+	on the NJB).
+
+	Fixed memory leaks in procedure.c
+
+	Patches from Linus Walleij (2002-03-26):
+
+	Added NJB_Adjust_Sound() for full EAX and volume control
+
+	Rewrote the old eax_t into a struct that parses the EAX
+	data into meaningful chunks and makes it easy to maintain.
+	also added eax_destroy() to rid this structure.
+
+	Added fully functional NJB_Send_File() and NJB_Delete_File()
+	NJB_Get_File() still poses problems. Added sample programs
+	that illustrate usage of these functions.
+
+	Removed small bug in sendtr.c, usage() was missing
+	parentheses.
+
+	Patches from Linus Walleij (2002-03-29):
+
+	Fixed bugs with filesize and string termination in
+	tag pack/unpack routines in datafile.c
+
+	Bug fixes in protocol.c regarding datafiles.
+

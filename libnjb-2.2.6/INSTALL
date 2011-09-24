@@ -1,0 +1,283 @@
+INSTALLATION OVERVIEW
+=====================
+
+Once libnjb is built and installed, you will have the following files
+($PREFIX is the --prefix option given to the "configure" script and
+defaults to /usr/local/):
+
+   $PREFIX/lib/libnjb.a		      Static C library
+   $PREFIX/lib/libnjb.so.x.0.0	      Dynamic C library
+   $PREFIX/lib/libnjb.so.x            A link to the library
+   $PREFIX/lib/libnjb.so              A link to the library
+   $PREFIX/include/libnjb.h	      C header file for libnjb API
+   $PREFIX/lib/pkgconfig/libnjb.pc    pkg-config configuration file
+
+Sample programs will be built in the "sample" directory, and should
+help you get used to using the libnjb API, as well as provide some
+immediate gratification. Links to other programs using the libnjb
+API may be found at the homepage: http://libnjb.sourceforge.net/
+
+
+Shared Library Support
+----------------------
+
+Shared library linking is supported. You will need to 'make install' 
+the library before you can execute the sample binaries, and add the 
+libnjb directory to your shared library search path.
+
+On Linux, you would add the line "/usr/local/lib" to your 
+"/etc/ld.so.conf" or as a oneliner in for example a 
+"/etc/ld.so.conf.d/local.conf" file and run the 
+program "ldconfig" to scan in the new path. This is a part of
+the Linux shared library loader actually.
+
+To access the library from real odd locations you can use 
+the LD_LIBRARY_PATH environment variable, for example:
+
+  % export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+This way of enabling the library to link is a workaround hack.
+Note that the LD_LIBRARY_PATH is actually supposed to be used for
+testing, not production systems or distributions. It is commonly
+used as a workaround when a user is installing libraries in her/his
+home directory however. Read more about this environment variable
+here: http://www.visi.com/~barr/ldpath.html
+
+The shared library comes with different interface version numbers,
+for example libnjb.so.4, libnjb.so.5 and so forth. This is used so
+that both old and new libnjb libraries shall be able to coexist on
+the same system. For example Debian name their libnjb packages after
+the library version number, "libnjb0", "libnjb1" etc. When you 
+compile your programs they will typically bind to the latest version
+of the shared library. The latest version is always named
+$PREFIX/lib/libnjb.so.
+
+
+libusb Support
+--------------
+
+This package depends on libusb.  Get libusb from sourceforge at:
+
+   http://www.sourceforge.net/projects/libusb/
+
+Releases of FreeBSD prior to about 4.7-RELEASE had a conflicting, native
+library named libusb.a that is NOT the libusb required by this package.
+libnjb is not supported on these older FreeBSD releaeses.
+
+
+BASIC BUILD PROCEDURE
+=====================
+
+To build the package:
+
+   % ./configure
+   % make
+   % make install
+
+By default, libnjb will add the program-prefix "njb-" to all the
+example programs prior to installation. The program-prefix option 
+makes libnjb sample programs avoid collision with other programs like
+sox' "play" program. On Linux you should then typically type (see 
+below for details):
+
+   % ./hotplug.sh
+
+you can achieve the same with
+
+   % ./configure --enable-hotplugging
+
+you can turn off some speed enhancements (for testing) with:
+
+   % ./configure --no-turbo
+
+if you want to install the documentation type:
+
+   % make install-docs
+
+if you checked out the sources from CVS, you must first run the
+autogen.sh script that generates all the GNU autotools files. 
+Notice that this requires GNU autoconf, automake and libtool. This
+is done with:
+
+   % ./autogen.sh
+
+
+BSD-SPECIFIC NOTES
+==================
+
+In recent versions of FreeBSD, the default shell for root has been 
+changed from /bin/sh to /bin/csh. This may cause troubles. Then run:
+
+   % ./configure
+   % make SHELL=/bin/sh
+   % make install SHELL=/bin/sh
+
+Under FreeBSD, /usr/local is not included in the default search path for
+include and library files when using the compiler from the ports 
+collection.  You must set the CPPFLAGS and LDFLAGS environment variables
+prior to running configure:
+
+  % setenv SHELL=/bin/sh
+  % setenv CPPFLAGS=-I/usr/local/include
+  % setenv LDFLAGS=-L/usr/local/lib
+  % ./configure
+  % make
+  % make install
+
+If you build your compiler yourself, then this may not be necessary.  It
+may also not be necessary on NetBSD or OpenBSD.  If the build fails because
+it cannot locate the libusb header file, however, the above may be needed.
+
+Additionally, the sample programs use GNU getopt, which is included with
+systems that use the GNU C Library (such as Linux), so on BSD you may need
+to install getopt in order to compiler and run the sample programs.
+
+Some BSD:s have a problem with USB 2.0: the EHCI driver may need a patch
+(e.g. /FreeBSD-CVS/src/sys/dev/usb/ehci.c). The latest versions of 
+NetBSD have the problem fixed.
+
+libnjb desperately needs to be in the "ports" tree for FreeBSD, can
+someone please get it in there?
+
+
+LINUX-SPECIFIC NOTES
+====================
+
+You need to have libusb installed on your system, and libusb requires that
+you have the usbdevfs filesystem mounted.  If you don't know how to do this,
+see http://www.linux-usb.org/FAQ.html#gs3
+
+Distribution-specific notes
+---------------------------
+
+* Debian GNU/Linux has libnjb in the "testing" package tree, just type
+  "apt-get install libnjb5" to install libnjb if you are using Debian
+  3.1. The figure after the library may change: libnjb0, libnjb1 ... 
+  libnjb5 are the current versions. You can see if there are newer 
+  versions like libnjb6 available. (For your information, this figure 
+  is the same as the API revision number.)
+
+  If you want to develop using libnjb you also need to install the
+  package libnjb-dev (or similar number) and perhaps libnjb-doc which
+  contains documentation. The -dev and -doc versions always target the
+  latest version of libnjb.
+
+* Gentoo Linux has libnjb in their "portage" tree, just type "emerge libnjb"
+  to install libnjb. See:
+  http://gentoo-portage.com/media-libs/libnjb
+
+* Fedora Core packages (formerly Red Hat Linux) is available through
+  the Fedora Extras project, which is essetially a repository of
+  add-on packages to Fedora Core. Since Fedora Core 4 this repository
+  is enabled by default. On Fedora libnjb consists of three
+  sub-packages, all of which may be installed by issuing:
+
+  yum install libnjb libnjb-devel libnjb-examples  
+
+  Also, if you compile from source, note that libnjb installs into 
+  /usr/local/lib which is not part of the default library search path
+  in Fedora Core / Red Hat Linux. You will have to add /usr/local/lib
+  to your /etc/ld.so.conf and run "ldconfig" (as root) for the library
+  loader to find it.
+
+* Mandrake Linux packages libnjb by default and it is readily 
+  available in the base distribution.
+
+* SuSE Linux has traditionally been something of a troublesome issue,
+  but Packman (http://packman.links2linux.de/, packager Herbert Graeber) 
+  now has packages for SuSE. Like with Fedora it consists of three 
+  subpackages: libnjb, libnjb-devel and libnjb-examples.
+
+  Hotplugging needs a tweak to work on SuSE, alteast from
+  SuSE version 10.0 the following comes from Mariano Stokle:
+
+  * Go to /etc/fstab and change the usbfs line - change noauto 
+    for devmode=0666.
+
+  * Then go to /etc/udev/rules.d/50-udev.rules, go to almost 
+    the final line and find the comment 
+
+    # libusb device access (mount usbfs or usbdev nodes)
+
+    and in the next line change 
+
+    RUN+="/bin/mount -t usbfs usbfs /proc/bus/usb" for
+    RUN+="/bin/mount -a -t usbfs"
+
+* Linspire has libnjb installed by default. Duane Maxwell wrote a
+  python wrapper for libnjb and that is what Linspire Lsongs uses.
+  For sources see: http://software.linspire.com/pool-src/libn/libnjb/
+
+Linux hotplugging
+-----------------
+
+After compilation and installation you may (and should) add hotplugging 
+support by running the hotplug script, if your distribution supports
+hotplugging (almost all do). This typically means you have something 
+in /etc/hotplug and that hotplugging is started when you boot your 
+machine in a script named /etc/init.d/hotplug or similar.
+
+Activate hotplugging by running:
+
+   %./hotplug.sh
+
+Hotplug will (typically) use the device map file installed by hotplug.sh
+at /etc/hotplug/usb/nomad.usermap to lift the device to userspace for the
+current user by running the script /etc/hotplug/usb/nomadjukebox. If 
+you have the program "resmgr" installed (currently used only by SuSE to 
+our knowledge) that program will be used for enabling desktop user 
+access, otherwise the current user of the desktop will be determined 
+from files in /var/run. (See the script "nomadjukebox" for details.)
+
+Linux udev hotplugging
+----------------------
+
+Newer Linux distributions have dropped support for the old hotplug system
+and rely solely on udev, and rules stored below /etc/udev/rules.d to
+handle permissions and actions on device connections. It's quite solid
+but the whole thing is rather shaky when it comes to such things as
+custom devices handled solely by libusb, which is what libnjb and for 
+example SANE backends use.
+
+The nomad.rules file that comes with libnjb can be used as a starter.
+First you need a crazy rule that creates a device node in the
+/dev/bus/usb hierarchy whenever any USB device is connected. The
+script has this at the top, you can comment it in if your 
+distribution does not already create these device nodes.
+
+Then libusb need to be patched to recognize this hierarchy. The 0.1.12
+version is the first which is properly fixed.
+
+The script sets the device access to "666" which is rather nasty
+(not that big security issue, unless you think someone will break
+into your jukebox) some systems prefer to let PAM do this by placing
+a configuration file in /etc/security/ somewhere. See the Fedora Extras
+SRPM source package in case you're interested in how it is handled 
+there.
+
+If you cannot run hotplugging
+-----------------------------
+
+If you have a distro without hotplugging enabled try this as root: 
+
+  % chmod -R a+w /proc/bus/usb
+
+You have to do this again every time you unplug/replug your USB cable 
+or restart the jukebox, every time you quit libnjb and restart it, 
+etc etc etc an alternative is to run libnjb as root which works just fine. 
+The problem is to somehow assure that you (ie the current user) always 
+has write access on  /proc/bus/usb/*
+
+Other distributions hotplugging
+-------------------------------
+
+This is if you don't have hotplugging enabled and do not want to set it 
+up on your machine either. You want to mount the usbfs manually.
+
+     According to Tim Pepper, this should work in your 
+     /etc/fstab:
+
+     none  /proc/bus/usb  usbdevfs noauto,devmode=0666 0 0
+
+You can find the Linux hotplug project at:
+http://linux-hotplug.sourceforge.net/

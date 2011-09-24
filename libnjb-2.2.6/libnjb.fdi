@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> <!-- -*- SGML -*- -->
+<deviceinfo version="0.2">
+  <device>
+    <match key="info.bus" string="usb">
+      <match key="usb.vendor_id" int="0x0471">
+        <match key="usb.product_id" int="0x0222">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="oasis">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">oasis</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">oasis</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4100">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox 2</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4101">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox 3</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4108">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox Zen</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x410b">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox Zen USB 2.0</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4109">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox Zen NX</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4110">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox Zen Xtra</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4111">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Dell Digital Jukebox</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x411b">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox Zen Touch</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x411d">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Zen</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x411e">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Nomad Jukebox Zen Micro</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4126">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Dell Digital Jukebox (2nd Generation)</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4127">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Dell Pocket DJ</merge>
+        </match>
+      </match>
+      <match key="usb.vendor_id" int="0x041e">
+        <match key="usb.product_id" int="0x4136">
+          <match key="info.capabilities" contains_not="portable_audio_player">
+            <append key="info.capabilities" type="strlist">portable_audio_player</append>
+          </match>
+          <merge key="info.category" type="string">portable_audio_player</merge>
+          <merge key="portable_audio_player.access_method" type="string">user</merge>
+          <match key="portable_audio_player.access_method.protocols" contains_not="pde">
+            <append key="portable_audio_player.access_method.protocols" type="strlist">pde</append>
+          </match>
+          <append key="portable_audio_player.access_method.drivers" type="strlist">libnjb</append>
+          <match key="portable_audio_player.output_formats" contains_not="audio/mpeg">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/mpeg</append>
+          </match>
+          <match key="portable_audio_player.output_formats" contains_not="audio/x-ms-wma">
+            <append key="portable_audio_player.output_formats" type="strlist">audio/x-ms-wma</append>
+          </match>
+          <merge key="portable_audio_player.libnjb.protocol" type="string">pde</merge>
+          <merge key="portable_audio_player.libnjb.name" type="string">Creative Zen Sleek</merge>
+        </match>
+      </match>
+    </match>
+  </device>
+</deviceinfo>

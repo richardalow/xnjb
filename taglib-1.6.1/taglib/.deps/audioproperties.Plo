@@ -1,0 +1,8 @@
+audioproperties.lo .libs/audioproperties.o: audioproperties.cpp \
+  audioproperties.h taglib_export.h taglib_config.h
+
+audioproperties.h:
+
+taglib_export.h:
+
+taglib_config.h:

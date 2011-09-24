@@ -1,0 +1,324 @@
+Nomad Jukebox API
+v2.2.6
+2007-09-05
+
+http://libnjb.sourceforge.net/
+http://www.sourceforge.net/projects/libnjb/
+
+
+Release Notes
+-------------
+
+This is the second release of the C API for the Nomad Jukebox.
+For changes regarding the API, see CHANGELOG. You should also
+read the new documentation that can be generated with doxygen
+(just run "doxygen" in the root directory, output in doc/html)
+or found at http://libnjb.sourceforge.net/api/html/
+
+This library has successfully been built and tested under:
+
+   FreeBSD 5.1-RELEASE (x86)
+   Linux 2.4.20 (x86)
+   MacOS X (Darwin, PowerPC)
+   Microsoft Windows (Win2K)
+   Solaris (using Suns port of libusb)
+
+NetBSD users may be able to build this library as well, with
+minimal or no porting, due to the fact that FreeBSD uses the NetBSD
+USB stack. We have not built libnjb for VMS, BeOS, OS/2 and
+<insert your favourite obscure OS here>. Help us port it if you're
+interested!
+
+These devices are handled, more or less perfect:
+
+* Creative NOMAD Jukebox 1 a.k.a. Creative D.A.P.
+* Creative NOMAD Jukebox 2
+* Creative NOMAD Jukebox 3
+* Creative NOMAD Jukebox Zen
+* Creative NOMAD Jukebox Zen USB 2.0
+* Creative NOMAD Jukebox Zen NX
+* Creative NOMAD Jukebox Zen Xtra
+* Creative Zen Touch
+* Creative Zen Micro
+* Creative Zen Sleek
+* Creative Zen
+* Dell Digital Jukebox ("Dell DJ")
+* Second Generation Dell Digital Jukebox
+* Dell Pocket DJ
+* Third Generation Dell Digital Jukebox
+
+Newer devices have a 2.x MTP/PlaysForSure firmware upgrade -  we 
+do not support MTP so please don't install it!
+
+THESE DEVICES ARE NOT SUPPORTED:
+
+Creative Zen Portable Media Center
+Creative Zen MicroPhoto
+Any other MTP/PlaysForSure device
+
+If you want to use MTP devices under Linux you are currently out of
+luck. Please start hacking up an MTP library if you have nothing better
+to do, there is even a protocol specification for it!
+
+
+NJB Issues
+----------
+
+It's pretty easy to "wedge" your JukeBox during a session.  If you get
+stuck with a "Host is in control" message, simply disconnect the USB
+cable and reconnect it.  Apparently, the documentation that Creative
+provides warns against this activity, but USB devices are hot-pluggable,
+so it won't hurt anything (the standard disclaimers apply, of course).
+
+
+Issues with newer jukeboxes
+---------------------------
+
+Some users of NOMAD Jukebox Xtra have reported problems when using the
+library for the first time. This seems to be caused by the playlist
+of preloaded content. Try to remove all playlists by using the menus
+on the device, and see if this solves your problem.
+
+
+USB issues
+----------
+
+Some users experience problems with USB communication. There are some
+hardware USB controllers which is problematic. This might be caused
+by either electrical properties of the bus, or by badly programmed 
+drivers in the host kernel.
+
+nForce 2 motherboards are known to be problematic.
+
+
+FreeBSD Performance Considerations
+----------------------------------
+
+It appears that the uhci device under some FreeBSD releases performs
+poorly on bulk data transfers.  The USB 1.1 specification defines
+1000 "frames" every second, for 1 frame per ms.  The host controller
+determines how many packets to place in each frame, based on available
+bandwidth and bandwidth requirements.  This is called "bandwidth
+reclaimation", and the FreeBSD USB stack does not do this as of
+4.x-RELEASE.  The end result is only one packet sent per frame,
+which severely limits the transfer rate: the NJB uses 64-byte
+packets, and the math gives us a data transfer rate of 64,000
+bytes/second.  Yuck.
+
+If you have a UHCI USB controller, this will bite you.  If you have
+an OHCI USB controller, the ohci device driver "does the right
+thing", and will give you 430kb/second (or so).  However, there is
+a caveat: I have noticed some instabilities in the ohci driver, so
+you may have problems here, too.
+
+This problem with the uhci stack has been fixed under NetBSD and
+FreeBSD 5.x.
+
+Some BSD:s have a problem with USB 2.0: the EHCI driver may need a patch
+(e.g. /FreeBSD-CVS/src/sys/dev/usb/ehci.c). The latest versions of 
+NetBSD have the problem fixed.
+
+
+Compilation of programs under MacOS X
+-------------------------------------
+
+Older versions of libusb for Darwin does not handle short USB writes
+properly, which is a prerequisite for libnjb to work. This has been
+fixed since the 0.1.8 version of libusb.
+
+If you're writing your own applications to use libnjb under MacOS X
+you will have to add the line "-framework IOKit" to your CFLAGS.
+If you use compilation with pkg-config the flags will be added
+automatically and you need not worry about it, see below on 
+"compiling programs for libnjb".
+
+
+Compilation of programs under Windows/Win32
+-------------------------------------------
+
+See the separate README.TXT file in the "windows" subdirectory.
+
+
+What Works
+----------
+
+Most of the functions in the API have been tested and documented.
+Right now, using the API, you can:
+
+   - transfer audio tracks to and from the NJB
+   - delete audio tracks
+   - manage playlists (create, rename, update and delete)
+   - get playlist information
+   - send and recieve data files
+   - get data file metadata
+   - obtain disk usage (free and total bytes)
+   - get an set the "owner" string
+   - play tracks
+   - manipulate sound parameters (volume and EAX)
+   - obtain full internationalization using UTF-8 unicode
+
+
+What Will Never Get Done
+------------------------
+
+There exists an API for firmware upgrading of the series 3 devices.
+This API is unsupported and you shall not use it. IT HAS NEVER BEEN
+TESTED. It was only implemented out of curiostity. This may 
+disappoint some of you, but we don't care, because:
+
+   1) Creative doesn't release the firmware as standalone data blocks
+      for transferring.
+
+   2) Of all the functions in the USB protocol, the firmware update 
+      is the only one that could potentially render your NJB unusable.
+
+   3) We're not willing to use our own NJBs as a guinea pigs.  If we're not
+      comfortable doing this to ourselves, then we're sure as hell not 
+      going to do it to other people.
+
+Send us guinea pig NJBs and we might support it some day.  ;)
+
+For more information see below about the firmware upgrade sample
+program.
+
+
+Building and Installing
+-----------------------
+
+See the "INSTALL" file.
+
+
+Compiling programs for libnjb
+-----------------------------
+
+libnjb has support for the pkg-config script by adding a libnjb.pc 
+entry in $(prefix)/lib/pkgconfig. To compile a libnjb program, 
+just write:
+
+gcc -o foo `pkg-config --cflags --libs libnjb` foo.c
+
+This also simplifies compilation using autoconf and pkg-config: just 
+write e.g.
+
+PKG_CHECK_MODULES(NJB, libnjb)
+AC_SUBST(NJB_CFLAGS)
+AC_SUBST(NJB_LIBS)
+
+To have libnjb LIBS and CFLAGS defined. Needless to say, this will 
+only work if you have pkgconfig installed on your system, but most 
+people have nowadays.
+
+If your library is installed in e.g. /usr/local you may have to tell
+this to pkgconfig by setting the PKG_CONFIG_PATH thus:
+
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+
+
+Firmware upgrade sample program
+-------------------------------
+
+As of libnjb 2.1 there is a small program that can extract firmware
+from Windows executables or use previously extracted raw firmwares
+and send them to the series 3 devices. This sample program is called
+"fwupgrade" and lives in the "samples" directory.
+
+* The first rule of fwupgrade is you don't use fwupgrade.
+
+* The second rule of fwupgrade is you DON'T USE FWUPGRADE.
+
+Extracting the firmware from Windows executables is relatively easy,
+just download Creative's firmware installer .exe file and run
+"fwupgrade" against it. If this fails, the executable may be
+compressed. Then you have to start the executable in Windows (or
+WINE or whatever) and copy the uncompressed executable from some
+temporary directory under:
+
+C:\Documents and Settings\<yourusername>\Local Settings\Temp
+
+For example the firmware upgrade for Zen USB 2.0 version 1.11.01
+is named "JBZen2PCFW_1_11_01.exe" but this is not possible to use
+with "fwupgrade". You need to run that executable and then locate
+a file named "Zen(USB2.0)Upgrade_1_11_01.exe" somewhere in that
+temporary directory. Different Windows versions may put these
+extracted files in different places. The extracted executable can
+be run through fwupgrade. The Dell DJ firmwares comes in a handy
+self-extracting archive (this can be run using a Windows emulator
+such as WINE if desired).
+
+Newer firmwares, such as the Zen Micro firmwares, seem to be 
+uncompressed or compressed with RAR. Try to extract the contents
+using a RAR un-archiver, perhaps WinRAR.
+
+What we do is to go into a Windows executable and extract the 
+firmware, which is compressed with the free software library
+zlib. Newer firmware seem to not be compressed with zlib.
+
+Needless to say, there is no guarantee about anything related to
+fwupgrade. And by the way, don't use fwupgrade.
+
+
+Documentation
+-------------
+
+Read the new documentation that can be generated with doxygen
+(just run "doxygen" in the root directory, output in doc/html)
+or found at http://libnjb.sourceforge.net/api/html/
+
+The NJB USB Protocol Guide, available from SourceForge from the 
+same place where you got libnjb, has some nice info on the lower
+level protocol on the NJB1. For other models, see the file HACKING
+and the source files protocol3.c/protocol3.h.
+
+
+Did Creative help you with this?
+--------------------------------
+
+No. They didn't help us. We did everything by reverse-engineering, by
+looking at the USB traffic. We did not disassemble any Creative code.
+We did ask Creative for support, but they have not offered assistance
+in any official capacity. The same goes for Dell.
+
+
+Programs using libnjb
+---------------------
+
+If you want to test and look at some programs that use libnjb, apart
+from the samples that comes with the library, check out the following:
+
+Gnomad 2 (Linux, BSD, GNOME):
+   http://gnomad2.sourceforge.net/
+Neutrino (Linux, BSD, GNOME - also makes the njbstack for GNOME):
+   http://neutrino.sourceforge.net/
+Creative Nomad Jukebox KIO::Slave (Linux, BSD, KDE):
+   http://sourceforge.net/projects/kionjb
+Nomad Media Manager (Linux, BSD, GNOME):
+   http://nomaedia.sourceforge.net/
+Nomadsync (Linux, Windows):
+   http://nomadsync.sourceforge.net/
+XNJB (MacOS X):
+   http://www.wentnet.com/projects/xnjb/
+KZenExplorer
+   http://kzenexplorer.sourceforge.net/
+
+
+Feedback
+--------
+
+Send feedback to the user and developer lists at Sourceforge. You may
+subscribe to this list through the project web page, see:
+http://sourceforge.net/mail/?group_id=32528
+
+
+User community
+--------------
+
+For generic information on the Creative or Dell devices, see these
+Wikipedia entries:
+
+http://en.wikipedia.org/wiki/Creative_Nomad
+http://en.wikipedia.org/wiki/Creative_Zen
+http://en.wikipedia.org/wiki/Dell_Digital_Jukebox
+
+For a user-supported community of high quality, see:
+
+http://www.nomadness.net/

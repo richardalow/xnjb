@@ -1,0 +1,3 @@
+asftag.lo .libs/asftag.o: asftag.cpp ../../config.h
+
+../../config.h:

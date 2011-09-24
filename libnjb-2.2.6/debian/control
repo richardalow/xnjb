@@ -1,0 +1,46 @@
+Source: libnjb
+Section: libs
+Priority: optional
+Maintainer: Shaun Jackman <sjackman@debian.org>
+Build-Depends: libusb-dev (>> 0.1.7), doxygen, debhelper (>= 4.0.0)
+Standards-Version: 3.6.1.0
+
+Package: libnjb4
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: libnjb-hotplug
+Description: Creative Labs Nomad Jukebox library
+ A library for communicating with the Creative Nomad Jukebox MP3
+ player. More information can be found at the libnjb web site:
+ http://sf.net/projects/libnjb/
+ This package contains the shared library.
+
+Package: libnjb-dev
+Section: libdevel
+Architecture: any
+Depends: libnjb4 (= ${Source-Version}), libusb-dev (>> 0.1.7)
+Description: Creative Labs Nomad Jukebox library development files
+ A library for communicating with the Creative Nomad Jukebox MP3
+ player. More information can be found at the libnjb web site:
+ http://sf.net/projects/libnjb/
+ This package contains the headers and development libraries.
+
+Package: libnjb-doc
+Section: libdevel
+Architecture: all
+Description: Creative Labs Nomad Jukebox library documentation
+ A library for communicating with the Creative Nomad Jukebox MP3
+ player. More information can be found at the libnjb web site:
+ http://sf.net/projects/libnjb/
+ This package contains the development documentation.
+
+Package: libnjb-hotplug
+Section: admin
+Architecture: all
+Depends: hotplug
+Description: Creative Labs Nomad Jukebox hotplug library
+ A library for communicating with the Creative Nomad Jukebox MP3
+ player. More information can be found at the libnjb web site:
+ http://sf.net/projects/libnjb/
+ This package contains the hotplug library.

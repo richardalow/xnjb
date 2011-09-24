@@ -1,0 +1,847 @@
+Introduction to libnjb hacking
+by Linus Walleij
+------------------------------
+
+This file contains some tips on how to get started if you want to
+change stuff in libnjb, and some technical details we have found.
+If you know some generic stuff about the NOMAD, Zen or Dell DJ 
+devices, stuff you think is generally useful to anyone using them,
+please put the information in Wikipedia at these three locations:
+
+http://en.wikipedia.org/wiki/Creative_Nomad
+http://en.wikipedia.org/wiki/Creative_Zen
+http://en.wikipedia.org/wiki/Dell_Digital_Jukebox
+
+As a developer, first join the developer list at SourceForge, for 
+details see the project page at:
+
+  http://www.sourceforge.net/projects/libnjb/
+
+
+Architecture and portability:
+-----------------------------
+
+Libnjb uses the libusb which in turn use the kernel of the host
+operating system:
+
+              libnjb
+                |
+              libusb
+                |
+              kernel
+
+When you're trying to fix a problem, first try to locate in which
+layer of this sandwich the problem is located. This improves libnjb,
+libusb and the kernel of your operating system at the same time,
+and as other projects use libusb you help a *lot* of people when
+you find bugs in libusb. See their homepage:
+
+  http://www.sourceforge.net/projects/libusb/
+
+Libnjb+libusb+kernel has been verified to work with:
+
+  * Linux 2.4 and Linux 2.6 - issues remain with some USB 2.0
+    cards. (Kernel problems, not in our code.)
+  * FreeBSD
+  * MacOS X
+  * Microsoft Windows (Win2K)
+
+Windows uses MinGW32 and libusb-win32, which is still in the works
+but quite stable, see: 
+http://www.mingw.org and http://libusb-win32.sourceforge.net/
+
+
+The devices:
+------------
+
+Libnjb developers have a special view of the different jukeboxes,
+based on their characteristics on the USB bus.
+
+* Nomad Jukebox "NJB1": USB 1.1, protocol 1. This device has it's
+  own protocol, not shared by any other jukeboxes. This device
+  runs the OaSis operating system developed at the Department of
+  Computer Science and Engineering in Kharagpur, India. There 
+  exists an IEEE paper on this OS that you can find if you do a
+  web search for "oasis operating system". The main CPU is a 
+  Cirrus Logic EP7212. The screen is 132x64 pixels. The drive is
+  6MB nominally with larger models available/upgradeable.
+
+* The "series 3" devices are so called because the first device in
+  this class was the Nomad Jukebox 3 "NJB3", which actually appeared
+  on the market before the Nomad Jukebox 2 "NJB2". All the series 3
+  devices share the same protocol, with minor differences between the
+  USB 1.1 and USB 2.0 devices. (USB 2.0 means "high speed device" 
+  here.) This protocol is assumed to have the internal name "PDE"
+  at Creative, which is probably to be read out "Personal Digital
+  Entertainment". They run on top of the Texas Instruments TI 
+  TMS320 DSP processor.
+
+
+Series 3 devices:
+
+* NOMAD Jukebox 2 "NJB2": USB 2.0, protocol 3
+  Screen: 132x64 pixels
+* NOMAD Jukebox 3 "NJB3": USB 1.1 + FireWire, protocol 3
+* NOMAD Jukeboz Zen "NJB Zen": USB 1.1 + FireWire, protocol 3
+* NOMAD Jukebox Zen 2.0 "NJB Zen 2.0": USB 2.0, protocol 3
+  Screen: 132x64 pixels
+* NOMAD Jukebox Zen NX "NJB Zen NX": USB 2.0, protocol 3
+* NOMAD Jukebox Zen Xtra "NJB Zen Xtra": USB 2.0, protocol 3
+  CPU/DSP: Texas Instruments TMX 320 (TMS 320)
+  USB controller: NEC 0720122GC
+  Screen: 160x104 pixels
+* Dell Digital Jukebox "DELL DJ": USB 2.0, protocol 3
+* Creative Zen Touch "Zen Touch": USB 2.0, protocol 3
+  Synaptics Touchpad chip
+* Creative Zen Micro "Zen Micro": USB 2.0, protocol 3
+  CPU/DSP: Texas Instruments TMS 320
+  Internal memory: 16MB
+  Screen: 160x104 pixels
+  Drive: 5GB
+  FM Radio
+  Synaptics Touchpad chip
+* Second Generation Dell Digital Jukebox: USB 2.0, protocol 3
+* Creative Zen Sleek
+* Creative Zen (a Creative Micro variant)
+
+We don't know much about the circuitry or operating systems in 
+these jukeboxes.
+
+Chart:
+
+                      Protocol    USB 1.1   USB 2.0  FireWire
+-------------------------------------------------------------
+NJB1                  1           X
+NJB2                  3                     X               |
+NJB3                  3           X                  X      |
+NJB Zen               3           X                  X      |
+NJB Zen 2.0           3                     X               |
+NJB Zen NX            3                     X               | series 3
+NJB Zen Xtra          3                     X               |
+Dell DJ               3                     X               |
+Creative Zen Touch    3                     X               |
+Creative Zen Micro    3                     X               |
+Dell DJ 2nd Gen       3                     X               |
+Dell Pocket DJ        3                     X               |
+Creative Zen Sleek    3                     X               |
+Creative Zen          3                     X               |
+
+
+The Dell DJs also differs from the series 3 jukeboxes in that it
+only has the equalizer presets for the EAX processor installed.
+None of the environments, spatialization, time-scale, or 
+smartvolume stuff found in other series 3 jukeboxes is available.
+The same configuration goes for the Zen Touch, but in difference
+to the Dell DJs, this model had the ability to change boot-up
+bitmap in earlier firmware.
+
+Odd feature chart:
+
+                      SmartVolume    Bitmap change
+-------------------------------------------------------------
+NJB1                  
+NJB2                  ?              X
+NJB3                  X              X
+NJB Zen               X              X
+NJB Zen 2.0           X              X
+NJB Zen NX            X              X
+NJB Zen Xtra          X              X
+Dell DJ               
+Creative Zen Touch                   X (broken in some FW)
+Creative Zen Micro    X
+Dell DJ 2nd Gen       
+Dell Pocket DJ        
+Creative Zen Sleek    X
+Creative Zen          X
+
+The Micro/Sleek/Zen have two additional distinct features: it 
+can act as a standard USB Mass Storage device, which means 
+you set aside 2GB (no more!) for use as a Mass Storage device. 
+The Mass Storage mode cannot be used in parallell with the ordinary 
+operation mode, and you cannot access the files in the Mass 
+Storage area from the ordinary file storage view.
+
+Additionally some devices (currently Zen Touch and newer, like
+Dell DJs gen 2, Pocket DJ, Micro, Sleek and plain Zen) 
+may also talk the Microsoft Media Transfer protocol.
+This is done by a firmware upgrade: once your device
+is MTP, it stays MTP until you have to downgrade to firmware 
+1.02.05 or above in the 1.x series. (The 2.x series are all MTP 
+versions.) If you want to use it under *NIX:es and Mac OS, you 
+need some driver or library that can talk MTP to it (we haven't
+heard about such a thing), or you simply should not do this 
+firmware upgrade.
+
+The Creative Zen Portable Media Center and Creative Zen MicroPhoto 
+does not use either protocol: we don't know what it talks and 
+haven't implemented it either, but we assume it is actually the 
+Microsoft Media Transfer Protocol. Both devices have three 
+USB endpoints, two bulk message pipes and one interrupt pipe,
+which is typical for devices using Microsoft message marshalling
+(such as RNDIS) which gives a hint of what it uses.
+
+The Nomad (original device, a rebranded YEPP from Samsung) or 
+Nomad II cannot use libnjb, as they have a totally different 
+protocol. The MuVO^2 players and similar all use the USB mass
+storage standard and can be used with e.g. the Linux kernel 
+without any need for special-purpose drivers like libnjb.
+
+
+System Maintenance Menu
+-----------------------
+
+The series 3 devices have a hidden system maintenance menu which
+can be used if your device has been very distracted. The following
+description on how to access it is from the Nomadness.net site:
+
+  To access the maintenance menu of all Zen players except the Zen 
+  Micro hold down the play/pause button, while holding this press 
+  and release the reset switch, CONTINUE to keep the play/pause 
+  button held down until the Maintenance Menu appears.
+
+  To access the maintenance menu on the Zen Micro, remove the 
+  battery, hold the power switch to the "on" position and CONTINUE 
+  TO HOLD IT THERE while reinserting the battery.
+
+In the system maintenance menu you can clean up (defragment, look for
+errors) the hard disk, format the entire hard disk (which will destroy
+absolutely everything on your device) or reload the operating system.
+The latter two options are good when your device seems to have died
+totally. To reload the OS you need a suitable firmware upgrade program,
+it is unclear if the libnjb firmware upgrade command line program can
+be used for this, but probably it can.
+
+The system maintenance menu is probably equal to the firmware segment
+called "FRESC" which means it is also known as "rescue mode". We 
+believe this part of the firmware along with "FBOOT" reside in flash
+memory inside the device, and will survive a hard disk crash or
+hard disk replacement. This menu is commonly used by people who replace 
+the hard disk inside their Nomad/Zen devices.
+
+
+Suggested Projects:
+-------------------
+
+* Fully analyze and document the series 3 / "PDE" protocol. Major
+  missing pieces: SmartVolume management and functional setting 
+  up of start-up image on devices that support it.
+
+* Create a plugin for the GNOME Rhythmbox program in the same spirit
+  as the iPod plugin.
+
+* Create a plugin for the MacOS X iTunes program. Creative hired a
+  firm which actually did this, but the resulting work was never
+  officially distributed for unknown reasons, but probably due to 
+  license disagreements between Apple and Creative regarding Apples
+  iTunes SDK. Creating a workable plugin would probably need 
+  reverse-enginnering the Apple iTunes SDK in order to be able
+  to interface iTunes without their consent. (The iTunes plugin
+  was accidentally made available for some time at Creatives site 
+  anyway, so you can try to locate it. It does not support newer
+  devices.)
+
+* Filesystems integration, see below.
+
+* Reverse-engineer and write API for the calendar, task and contact
+  list feature of the NJB Zen Micro. Create a plug-in for GNOME:s
+  Multisync (http://multisync.sourceforge.net/) that use this
+  API.
+
+* Media Transfer Protocol should probably be handled by a separate
+  MTP library. (Is there already such a thing?)
+
+
+On writing NJB filesystem-like components:
+------------------------------------------
+
+Users of Unix-like operating systems in particular have a nack to
+turn everything into filesystems. Naturally, many people believe that
+the best way of accessing the jukeboxes would be through a filesystem
+component, which is indeed also the way that USB mass storage-enabled
+devices like the Nomad MuVo and other peripherals like digital 
+cameras do it.
+
+The problem with the Nomad Jukeboxes is that they are actually not
+filesystems: internally, the jukeboxes are databases. The Apple iPod
+is engineered very much the same way. Thus, a "file" in a nomad
+jukebox consists of a database entry with several metadata 
+components, such as artist, title, original filename, and the actual
+MP3/WAV/WMA-file is just a binary large object (BLOB) in this 
+database entry. Such a database structure is not easily reflected
+as a filesystem: when reading files off the device this is easy
+enough, but when *writing* files, all relevant parts of the metadata
+has to be added to the database. This means that a filesystem 
+component that is capable of writing to the jukebox would have to
+include something like an ID3 tag parser to extract metadata from
+the file and insert this into the database.
+
+The main reason why libnjb is a userspace library and not a kernel
+filesystem is, however, that this makes libnjb portable, so that it
+can be used on Linux, BSD, MacOS X and other targets. Kernel modules
+are very kernel specific. It might be possible to "wrap" libnjb into
+a kernel module, but no-one has yet tried this. Also, it brings the
+advantage that a crash in libnjb does not crash the entire kernel 
+and thus the entire operating system. Only a so-called microkernel
+where filesystems are user processes could survive such an event, 
+and neither e.g. Linux nor BSD is a microkernel.
+
+There are however filesystems available at a higher level of 
+abstraction: the desktop projects GNOME and KDE both carry their
+own database-like filesystem interfaces. (The original BeOS also
+had such a filesystem.) The GNOME interface is known as GNOME
+VFS (Virtual File System, not to be confused with the Linux 
+kernel VFS) and in KDE it is known as "kioslaves", the KDE
+IO-Slaves. Even Microsoft Windows will in the near future incorporate
+a system known as WinFS exhibiting much the same qualities. These 
+are very much fit for the kind of database structure used by the 
+jukeboxes.
+
+Shaun Jackman has implemented a KDE KIO::slave for libnjb, named
+kionjb, available at Sourceforge:
+
+http://sourceforge.net/projects/kionjb/
+
+Pedro Ayala Gomariz and David A. Knight, libnjb developers, have
+started a project named "njbstack" that aims at integrating libnjb 
+with the GNOME VFS. This GNOME VFS interface is available in a test 
+version from the project page for Neutrino at:
+
+http://sourceforge.net/projects/neutrino/
+
+Projects in this spirit are probably the best way to use libnjb
+in desktop systems.
+
+
+General USB characteristics:
+----------------------------
+
+All jukeboxes identify themselves as "custom" devices.
+Apart from the compulsory device control endpoints, NJB1 uses 
+endpoint 2 for both IN and OUT bulk transactions. The series 3
+devices use endpoint 1 for OUT transactions and endpoint 2 for 
+IN transactions.
+
+The NJB1 has one configuration only. The USB 2.0 devices usually 
+have  two configurations: high-speed (default) and full-speed 
+(second configuration). When two configurations are present, they
+are named "MEDIA" and both have one interface only, named "PDE1". 
+The Zen Touch has one unnamed configuration and one "PDE1" 
+interface.
+
+This "PDE1" interface is in turn has the two bulk endpoints. 
+It is not known what "PDE" means, but newer Zen Micro devices
+that have been upgraded to support Microsoft Media Transfer
+Protocol are said to have endpoints named "MTP" instead. It may
+be assumed that Creatives internal name for the custom protocol
+that we call "series 3" is "PDE". In official talks Creative
+representatives have talked about "Portable Digital Entertainment"
+so this is most probably what "PDE" stand for.
+
+On a side note: the Creative Zen Portable Media Center has 
+three endpoints: two bulk in/out like the NJB1/series 3, and 
+an additional interrupt in endpoint, the uses of which is unknown.
+The presence of an extra endpoint gives at hand that this device
+is radically different from the jukeboxes. It is assumed to use
+MTP and may be running over RNDIS (Remote Network Driver Interface
+Specification).
+
+If you want to investigate the USB interface of your device, you
+can use the command "lsusb -v" under Linux.
+
+
+USB Device ID:
+--------------
+
+Find the USB Device ID for a new device, in Linux by issuing
+the command "lsusb -v". You could also look at the file 
+/proc/bus/usb/devices. Report this device ID to:
+
+* The libnjb development team. (Through the mailing list
+  located at SourceForge.) Please send entire output of your
+  lsusb -v command.
+
+* The device database at http://www.linux-usb.org/usb.ids
+  (email at top of that file).
+
+* The "usb.lst" device database used by Debian "discover-data" package
+  http://packages.debian.org/unstable/libs/discover-data.html
+  http://packages.qa.debian.org/d/discover-data.html
+
+(More places?)
+
+
+FireWire (IEEE 1394)
+--------------------
+
+Libnjb doesn't currently include support for FireWire. The reasons
+are simple:
+
+* None of the active developers have a FireWire device. Only the
+  Nomad Jukebox 3 and the first version of Nomad Jukebox Zen
+  have FireWire. The Creative internal name for the FireWire
+  support was "Hotcake" in september 2001 (funny name) as can be 
+  seen from magazine articles and strings in their code.
+
+* We don't have any traces of how the FireWire traffic actually 
+  look. It would be good for us to know, whether we start to 
+  support it or not, so traces are welcomed. Notice that such
+  traces are hard to create: the only way we know of involves
+  using hardware protocol analyzers. It might be possible to 
+  run Windows + the Creative software inside something like
+  Bochs (http://bochs.sourceforge.net/) or WINE 
+  (http://www.winehq.com/) and extract the FireWire traffic
+  between the emulator and the emulating operating system.
+
+As you see, this is a nice task for an eager developer to take on.
+libraw1394 (http://sourceforge.net/projects/libraw1394) seem like
+a good place to start for providing 1394 support to libnjb.
+
+Other interesting things about firewire: besides only being 
+supported by two devices we have seen, the Creative driver files
+mention four additional devices that use 1394:
+
+ NOMAD Jukebox 4
+ NOMAD Jukebox 5
+ NOMAD Epsilon
+ NOMAD Jukebox 3i
+
+We don't know what these four devices actually are, but are probably
+cancelled projects at Creative that were replaced by the USB 2.0-
+based device line.
+
+
+USB Traces:
+-----------
+
+When developing libnjb it may be necessary to compare the 
+functionality of libnjb with that of programs developed for
+Microsoft Windows.
+
+Most Linux developers that want to create a driver for something
+running on Windows will try to intercept and decode USB traffic.
+There exist several professional and expensive tools to do this,
+both hardware and software. If you have such tools at your hands,
+then it is good for you, and you'll probably be doing a very good
+job at reverse-engineering the jukebox drivers.
+
+Moste people do not have such delicate devices and will have to
+resort to using software only. USB Snoopy is such a software tool
+for Windows, that will try to intercept and log USB traffic to/from
+any USB device:
+
+http://www.wingmanteam.com/usbsnoopy/
+
+Try to perform the parts of the behaviour that you want to capture
+and make a log. If it is implemented in libnjb but fails, compare
+the log to the result of running libnjb "sample" tools (found in
+the "sample" directory of this library) with the debug flag -D7
+(e.g ./handshake -D7) which will produce output similar to what
+USB snoopy produces.
+
+
+Library versioning:
+-------------------
+
+In src/Makefile.am there is a section setting the revision number of
+the library interface. To understand how libtool handles versioning
+see "info libtool version updating".
+
+The rule is quite simple:
+
+* If you only added a function, you'd start with x:0:y from libnjb,
+  bump the CURRENT (first number) by one  because you added an 
+  interface, and bump the AGE (last number) by one because you didn't 
+  remove any interfaces making it binary compatible, resulting in 
+  x+1:0:y+1.
+
+  Oddly enough though, libtool translates x:0:y to .so.x-1.y.0 to 
+  show that the library is backwards compatible. 
+
+* If you changed data structures or removed functions, the library
+  interface is NOT compatible and starting from x.0.y you should bump
+  CURRENT (first number) and reset the AGE number to x+1.0.0.
+
+
+Device addition / adding new commands:
+--------------------------------------
+
+When you add a new device to libnjb (provided you know the
+vendor and Device ID), you do this by:
+
+ * Adding the device in the "nomad.usermap" file
+ * Create device entry in "src/libnjb.h.in"
+ * Adding the appropriate definitons in the table
+   at the top of the file "src/base.c".
+ * At this point most new devices will "just work".
+ * If it still doesn't, try reverse-engineering and 
+   adding any device-specific code in "src/base.c",
+   "src/procedure.c", "src/protocol3.h", "src/usb_io.c" 
+   and the like.
+
+
+Error codes:
+------------
+
+In the series 3 devices, after almost every jukebox operation a 16-bit 
+number is returned, as a status code. Usually this code will be 0x0000 
+which means "OK".
+
+The other possible values cannot be said to have been deeply 
+explored, and are simply just regarded as "errors" though some of
+them may actually be informative. Normally libnjb will just write 
+out their occurance and leave it at that, doing nothing. If you 
+run into a certain new error code, try to figure out:
+
+* The number (given)
+* When it occurs, and thus what it means.
+* How it is handled by the PlayCenter software, if it can be provoked
+  there.
+* How we should implement code to handle the error.
+
+
+Unimplemented commands:
+-----------------------
+
+The following commands are so far unimplemented in libnjb:
+
+Nomad Jukebox 1 (src/protocol.c):
+
+* Firmware upgrade - if you want to experiment with this you
+  are either insane or have a box of NJB:s to waste. It is
+  possible to capture a firmware upgrade with a USB protocol
+  analyzer and "replay it", but we dare not try.
+
+In Nomad Jukebox 2, 3, Zen, Zen USB 2.0, NX, Xtra and the
+Dell Digital Jukebox, all known as the "series 3" devices 
+(src/protocol3.c):
+
+* Sending bitmap (sort of working, but needs cleanup)
+* Things related to the njb3_get_keys() command, enabling
+  DRM:ed WMA files (see below).
+* Smartvolume metadata addition to transfered files.
+* Zen Micro calendar, tasks and contacts synchronization.
+
+
+Root directory:
+----------------
+
+The internal format of the root directory used to store tracks,
+files and playlists on the series 3 devices is actually known: 
+when listing the files on the device, an odd file with a 16-byte 
+serial number appears in the directory. This file actually 
+contains the root directory so it can be examined. (We don't know 
+why it's shown there, perhaps for debugging?)
+
+A typical beginning of the file will look like this:
+
+0000: 0100 0100 0000 0000 0000 0e00 0000 0600  ................
+0010: 000c 001c 620f 0600 000e 0928 0000 0600  ....b......(....
+0020: 0016 78ca 7441 0600 0018 2000 0000 2000  ..x.tA.... ... .
+0030: 0007 7200 6500 6700 6c00 6500 6d00 6500  ..r.e.g.l.e.m.e.
+0040: 6e00 7400 6500 7400 2e00 7000 6400 6600  n.t.e.t...p.d.f.
+0050: 1400 000d 5c00 4600 6f00 6f00 5c00 6200  ....\.F.o.o.\.b.
+0060: 6100 7200 5c00 0000 0600 000c 001c 6218  a.r.\.........b.
+
+Meaning:
+
+0x0100 0x0100 0x0000 0x0000 0x0000 - unknown header
+
+0x0e000000   - number of metadata entries (little-endian 
+               in this case 14 entries)
+
+0x0600       - size of next element (little-endian)
+0x000c       - metadata post ID (big-endian)
+0x001c620f   - post ID
+0x0600       - size of next element (little-endian)
+0x000e       - metadata filesize (big-endian)
+0x09280000   - filesize (little-endian)
+0x0600       - size of next element (little-endian)
+0x0016       - metadata file timestamp (big-endian)
+0x78ca7441   - timestamp, standard C format (little-endian)
+0x0600       - size of next element (little-endian)
+0x0018       - metadata file attributes (big-endian)
+0x20000000   - Windows file attributes (big-endian)
+0x2000       - size of next element (little-endian)
+0x0007       - metdata file name (big-endian)
+0x72 0x00 .. - a string (little-endian)
+
+We see that the database use a mixture of little- and 
+big-endian values, whereas the bytes delivered over the USB 
+bus are actually all big-endian. Thus we can conclude that
+the processor is little-endian and will use little-endian
+words internally for it's databases, whereas the outside
+communication is defined to be big-endian only. The 
+metadata retrieved with the USB commands is very close to
+the internal database format, in fact the only real 
+modification is that it corrects all the 
+endianness-troubles.
+
+The database is finally terminated with two consecutive 
+0x0000 0x0000 words. These are also returned when reading
+out the database.
+
+Further, people who dumped out the harddisk of a Zen Xtra
+player see a file allocation table (in something called 
+"minifs", a miniature file system) on the disk, containing 
+these eight files (with some variations):
+
+  attrs.db
+  jukebox2.jrm
+  jukebox2.jrs
+  unicjkl.nft
+  kanji.dct
+  fhandle.db
+  btree.db
+  pm.cfg
+
+It's a rough guess that "attrs.db" contain the metadata for
+all tracks, "fhandle.db" contains the metadata for files, and
+"btree.db" contain the playlists. It is suspected that these
+databases may very well be stored by the BerkeleyDB database. 
+The following is a dump of the firmware index for a Zen Xtra 
+(done using the fwupgrade program that comes with libnjb with 
+no jukebox connected):
+
+Firmware CIFF image, 001e5c0c bytes:
+   Offset:   Type:  Size:
+   00000008  CINF   00000060 bytes "NOMAD Jukebox Zen Xtra"
+   00000070  DATA   00003b94 bytes "FBOOT"
+   00003c0c  DATA   00035082 bytes "FRESC"
+   00038c96  CENC   00099c6c bytes
+   000d290a  DATA   0002895c bytes "Hjukebox2.jrs"
+   000fb26e  DATA   000dc3f8 bytes "Hunicjkl.nft"
+   001d766e  DATA   0000e59e bytes "Hkanji.dct"
+
+We can see that the jukebox2.jrs, unicjkl.nft and kanji.dct
+files are actually part of the firmware. The "H" prefixing them
+in the firmware most likely tell that this is a file that shall
+be stored in the file system, not programmed to the flash memory
+or stored in the program area of the hard disk.
+
+The .nft files are probably fonts, the .dct files "dictionaries",
+given the obvious chinese terms "kanji" (writing system) and "cjk" 
+(chinese glyphs).
+
+A recent MTP firmware extracted from a Zen Touch FW 2.10.05 have
+these files:
+
+  attrs.db
+  jukebox2.jrm
+  jukebox.jrs
+  unicjkl.nft
+  splash.jbm
+  devicon.ico
+  devlogo.png
+  btree.db
+  plist.db
+  musicait.db
+  musicstr0.db
+  musicstr1.db
+  musicstr2.db
+  archvait.db
+  archvstr0.db
+  archvstr1.db
+  archvstr2.db
+  vdirait.db
+  vdirstr0.db
+  vdirstr1.db
+  vdirstr2.db
+  plistait.db
+  pliststr0.db
+  pliststr1.db
+  pliststr2.db
+  fsdirtree.db
+  fhandle.db
+  pm.cfg
+  pm.cbk
+  list.qm
+
+It seems the operating system has been quite rewritten and
+the database split (normalized?) in the recent MTP firmwares.
+
+
+Harddisk partitions:
+--------------------
+
+This info comes from quetacoatl at the Nomadness.net forum.
+The Creative devcies have a hard disk which is divided into
+tow separate volumes.
+
+At sector 0 of the disk is a master boot record, then on 
+sector 1, a filesystem called "minifs" begins. This has 
+clusters of 8 sectors and clusterchains, cluster allocation
+bitmaps, root directory etc. "minifs" has a root directory
+that can hold up to 255 entries. No file in this file system
+can be larger than 6 MB. The "minifs" filesystem has a 
+hierarchical directory structure.
+
+Right after the "minifs" volume comes a "CFS" volume (We
+assume this is "Creative File System".) which has clusters
+of 16 sectors and its own  clusterchains, root directory and
+cluster allocation bitmaps.
+
+It is suspected that CFS is modeled similarly to the Linux 
+Ext2 filesystem (though different).
+
+
+Smartvolume:
+------------
+
+Smartvolume exist on the series 3-devices only, except for the
+Dell Digital Jukebox which don't have it. The inner workings of 
+this option is not understood, and it is not mentioned in any
+Creative manuals either.
+
+The Creative software scans the file before transfer and after
+transferring the track append a large metadata chunk of 0x1b6
+bytes to the file. This metadata contain the smartvolume 
+parameters for the file. The format of this metadata is not
+understood, and as a consequence, we do not support smartvolume
+management. (Few use it anyway.) The little we know about these
+parameters is stored in the protocol3.h file.
+
+
+WMA encryption keys:
+--------------------
+
+At one time there was a discussion on the list about the
+mysterious "AR00PL00SG00" command that has appeared on the newer
+(series 3) devices. The "AR00", "PL00" and "SG00" are keys
+for one 64-bit number each, totalling 192 bits. Newer devices, 
+e.g. the Nomad Zen NX, has an "LG00" parameter as well, totalling
+256 bits of information, the Zen Micro has "PM00" too.
+
+It is suspected that these keys may have something to do with
+the Windows Media Audio (WMA) digital rights management (DRM)
+system, which will most likely encrypt the files using the
+Device ID and a previous seed from the jukebox. (So that the
+keys seen contain the seed.) A lot of reading from the keys 
+have been noticed when transfering DRM WMA files, and the key
+values change after transfering such files to the device.
+
+The libnjb will currently read in and parse these keys, but 
+won't do anything with them. It is possible to retrieve the
+keys from the API if you know how to encrypt the files using 
+them.
+
+
+Mysterious commands:
+--------------------
+
+In earlier firmware a command known as 0010 0001 was sent after
+each successful MP3 file transfer. It consisted of the second 
+32-bit part of the "AR00" key, the first word would not be sent, 
+but was set to zero. God knows why. If you have a good 
+guess, then please tell us. In newer software from Creative, 
+this command is no longer sent, and omitting it has proven to be
+perfectly safe.
+
+Such a parameter will typically look like this
+
+ 0010 0001			Command
+ 0000 0000			Zero?
+ 000a				Length of this command
+ 0014				Metadata "0014"
+ 0000 0000 			32-bit number always 0x00000000
+ 0007 a3bd			32-bit number, latter AR00 key
+ 0000				Terminator
+
+
+SDMI compliant device ID:
+-------------------------
+
+The 16 byte (128 bit) long device ID of the Nomad Jukeboxes 
+were introduced to be SDMI compliant. The specification for
+SDMI compliant portable devices says that a device ID shall be
+atleast 32 bits if assigned by an authority, and atleast 128
+bits if assigned randomly. I do not know if Creative actually
+assign device ID:s at "random", but they behave as if they do.
+
+Not that the Jukebox is SDMI compliant. It isn't. Nothing is,
+really, because SDMI failed. Microsoft, however, probably 
+use parts of the ideas from SDMI in their DRM technology for 
+WMA, so the SDMI device ID is used alongside the keys from the
+"AR00PL00SG00" command when encrypting WMA files before 
+transfer to a device such as a Nomad Jukebox.
+
+
+WMA DRM, Helix DRM and other things DRM
+---------------------------------------
+
+DRM is one hot potato since Apple Computers apparent success
+with actually using DRM (Digital Rights Management) in their
+iTunes Music Store made everyone else want a bite of the apple.
+So now everybody is trying to make their homebrewn DRM scheme 
+work on every device there is.
+
+Microsoft got Creative to jump onto their scheme, as used in
+Windows Media Player with WMA (Windows Media Audio) only.
+Almost all Creative devices support this DRM scheme, which
+is generic and used on all Windows Media protected files, be
+it audio or video alike.
+
+At one point Real Networks apparently got Creative to add 
+their own DRM scheme, named Helix DRM (along with the required
+AAC support for .RAX files), to the Creative Zen Xtra 
+firmware. (It was not their own hack, as confirmed by 
+Harvey from Creative, and it apparently has firmware revision
+1.11.01r, the small "r" is probably for "Real".) No other 
+device got this wicked thing. It was as far as known not some 
+separate firmware, but simply an inclusion of the Helix scheme 
+codebase into the Zen Xtra firmware. It can not play back 
+unprotected AAC files, and will only play AAC files from Real 
+with the Helix DRM on them. Word has it that it actually only
+converts the AAC stream to an MP3 stream on-the-fly.
+
+After some (apparently very disappointing) tries to get 
+every device in the world to support Helix DRM, Real 
+Networks gave up and wrote Harmony (included in Real Player
+10.5), a wrapper that will use some other DRM scheme already 
+available in the devices instead of pushing Helix DRM. On 
+the Creative engineered devices (including the Dell DJs) it 
+uses the WMA scheme, so all tracks are converted to WMA
+before upload (except on the Zen Xtra then). In the United 
+States, this is potentially a breach of the digital 
+millenium copyright act, which is quite bad for Real 
+Networks. They have been legally threatened by Apple 
+Computer over it. There is a lot of press about this 
+if you search the web.
+
+References:
+
+Microsoft WMA:
+http://en.wikipedia.org/wiki/Windows_Media_Audio
+
+Real Networks Helix:
+http://www.realnetworks.com/products/drm/index.html
+
+Real Networks Harmony:
+http://www.real.com/harmony
+
+
+Is it possible to run
+Linux / *BSD / Rockbox on the Nomad / Zen?
+------------------------------------------
+
+This is a common question on the Nomadness reverse-engineering 
+forum. Yes, for the series 3 devices it is very possible, but noone 
+has done it. There is no inherent protection on these devices for 
+uploading whatever firmware you wish. See the "fwupgrade" program
+for an example. The NJB1 is heavily protected against any such 
+tampering however.
+
+No-one has yet provided the basic building blocks for compiling, 
+debugging and installing such an operating system however, which 
+means to get a GCC or similar compiler running for the TMS320 
+processor, get a JTAG debugger up (for development work, end-users 
+won't need this), inteface the JTAG to GDB, then reverse-engineer 
+the machine code of the present OS on the devices to find register 
+allocation maps and write replacement device drivers for the desired
+operating system. This is the hard part, as you can see.
+
+Once there, you can probably get the player to play back whatever
+music file you have, Ogg Vorbis, FLAC, MODs or SIDs is no problem
+for a TMS320 processor.
+
+GCC for the TMS320:
+http://rtg.informatik.tu-chemnitz.de/?sec=43

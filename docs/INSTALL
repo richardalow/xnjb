@@ -1,0 +1,21 @@
+Install from binary
+-------------------
+
+To install from binary, mount the disk image and drag and drop the
+XNJB package. Then double click on XNJB to run.
+
+Install from source
+-------------------
+
+Untar the source with something like this:
+
+tar -xjvf xnjb-0.11.tar.bz2
+
+and double click on XNJB.xcode. If you don't have XCode installed
+please install it from the Developer CD or download for free from
+developer.apple.com.
+
+Compile by clicking Build from the Build menu. You can choose a
+development or deployment build from the Styles tab in Get Info on
+the XNJB project. Then run XNJB from the build directory.
+

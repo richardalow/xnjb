@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14740\viewh13180\viewkind0
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+
+\f0\fs24 \cf0 Known Issues (PDE devices):\
+\
+1. On some jukeboxes, after a disconnect, often XNJB will not reconnect unless\
+   the NJB is disconnected physically and reconnected. XNJB just hangs on \
+   'Connecting' (this will timeout eventually with an error). This is caused\
+   by no data being returned by a usb_bulk_read call. However, data is sent\
+   correctly as the NJB shows the connected to computer graphic. There must be\
+   an issue with resetting the usb bus in libusb that is different on Mac OS X\
+   to Linux (I have not seen this problem on Linux). This behaviour is shown\
+   on my NJB3 but the NJB1 and Micro very rarely need a hard disconnect.\
+\
+2. XNJB might fail with an error like 'usb_set_configuration: No such file or\
+   directory'.  Don't know what causes it but it appears as though a restart\
+   fixes it.\
+\
+Known Issues (MTP devices):\
+\
+1. Can't get or set the date/time of the device.\
+\
+2. XNJB does not read in album art with iTunes Integration enabled.  Does anyone know\
+   how to get album art from iTunes?\
+\
+3. Some devices are dual mode MTP and UMS/MSC.  The UMS code on OS X is broken (as of\
+   approximately 10.4.8) so fails to mount your player.  However, it will grab it\
+   so XNJB cannot connect.  The only way of getting round this that I know of is\
+   to disable the UMS driver so you cannot mount any UMS devices (USB keys, cameras,\
+   etc.).  If you think you have this problem, get the debug version of XNJB and run\
+   in the console.  You will see error messages similar to this if you have this problem:\
+\
+Device 1 (VID=0781 and PID=7460) is a SanDisk Sansa Express.\
+usb_os_open: 0781:7460\
+usb_claim_interface: called for interface 0\
+Interface 0 of device is 0x4f83\
+claim_interface: Interface 0 of device from QueryInterface is 0x3c7200\
+USB error: claim_interface(USBInterfaceOpen): another process has device opened for exclusive access\
+USB error: usb_claim_interface: couldn't claim interface\
+usb_claim_interface(): Undefined error: 0\
+LIBMTP PANIC: Unable to initialize device 1\
+LIBMTP PANIC: configure_usb_devices() error code: 7 on line 1561\
+LIBMTP_Get_First_Device: Error Connecting \
+\
+  The key thing to look out for is 'another process has device opened for exclusive access'.\
+  If you have this problem then the following workaround should help.  It's fully reversible but\
+  does require a restart.  As with all of XNJB, this is at your own risk.\
+\
+    1. Open up a terminal window\
+    2. Type:\
+\
+sudo mv /System/Library/Extensions/IOUSBMassStorageClass.kext /System/Library/Extensions/IOUSBMassStorageClass.kext.disabled\
+\
+and when prompted enter your password.\
+\
+    3. Restart.\
+\
+  To reverse this change, just reverse the filenames:\
+\
+sudo mv /System/Library/Extensions/IOUSBMassStorageClass.kext.disabled /System/Library/Extensions/IOUSBMassStorageClass.kext\
+\
+  and restart. \
+  \
+RL\
+2007-12-31}

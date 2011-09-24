@@ -1,0 +1,6 @@
+*.debhelper
+*.substvars
+files
+libnjb0
+libnjb-dev
+tmp

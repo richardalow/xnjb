@@ -1,0 +1,7 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "XNJB";
+CFBundleShortVersionString = "Version 1.5.9";
+CFBundleVersion = "1.5.9";
+CFBundleGetInfoString = "XNJB v1.5.9, Copyright 2004-2010 Richard Low.";
+NSHumanReadableCopyright = "XNJB Copyright 2004-2010 Richard Low.";

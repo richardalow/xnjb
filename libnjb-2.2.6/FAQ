@@ -1,0 +1,81 @@
+Frequently Asked Questions
+http://libnjb.sourceforge.net/
+------------------------------
+
+1. Is there a mailing list for users of libnjb?
+
+   Yes.  See:
+
+   http://lists.sourceforge.net/lists/listinfo/libnjb-users
+
+
+2. When I run the sample programs, I get "No NJB devices found", or a
+   silent failure (i.e., nothing happens and you get a prompt back)
+
+   If you are on Linux, you need to mount the usbdevfs filesystem,
+   and ensure that you have read/write permission to the "files"
+   there.  For more information, see
+   http://www.linux-usb.org/FAQ.html#gs3
+
+   You should also verify that you have the latest libusb sources
+   from SourceForge (you may need to grab them via CVS) if you 
+   have libusb v0.1.3b or earlier.
+
+   Under BSD, make sure you have read/write access to the ugen*
+   and usb* devices in /dev.  ugen support will need to be built in your
+   kernel (not required for BSD 5.x and higher, which builds devices
+   on the fly)
+
+3. Every other connection attempt fails with an I/O error.
+
+   When the NJB is "released" by the host software, there is a
+   brief cycle time (a few seconds or so) during which you cannot
+   reattach to the device.  If you retry the command a few 
+   seconds later, it may work.
+
+   Under Linux, there appears to be a problem with the communications
+   between libnjb, libusb and the USB stack.  This causes "every other
+   connection fails" problems on some systems, and has not been
+   root-caused.  Unplugging/replugging the device (physically!) appears 
+   to get things working again, and sometimes simply retrying the 
+   command works, as well.
+
+
+4. I am getting bulk data transfer failures under Linux.
+
+   This is also a known issue that appears to be an interaction between
+   libnjb and libusb.  Although it has not been root-caused, the current
+   suspicion is that libnjb is writing too aggressively to the USB
+   stack, and usb_bulk_write may be failing on EINPROGESS.  Again, this
+   is just a guess based on some scattered evidence.  There is no solution
+   other than to retry. Using more recent kernels and libusb 
+   implementations may solve the problem.
+
+
+5. I am getting shared object/shared library errors (something like 
+   "libnjb.so.0: cannot open shared object file").
+
+   See the README file under the "Shared Library Support" section.
+
+
+6. How do I get USB 2.0 working?
+
+   First assure yourself that your hardware is really USB 2.0
+   compatible. This goes for both the motherboard, hub, and the
+   device you want to connect.
+
+   Kernel 2.6.x (and newer versions of 2.4.x) have three USB driver
+   modules: UHCI, OHCI and EHCI. USB 2.0 use the EHCI driver, leave
+   out the others and recompile your kernel. Typical config status:
+
+   # USB support
+   CONFIG_USB=y
+   # CONFIG_USB_DEBUG is not set
+   # Miscellaneous USB options
+   CONFIG_USB_DEVICEFS=y
+   # USB Host Controller Drivers
+   CONFIG_USB_EHCI_HCD=y
+   CONFIG_USB_OHCI_HCD=y
+   # CONFIG_USB_UHCI_HCD is not set
+
+   See also: http://www.linux-usb.org/usb2.html

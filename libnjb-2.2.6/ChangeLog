@@ -1,0 +1,479 @@
+2007-09-05  Linus Walleij  <triad@df.lth.se>
+
+	* nomad.rules: smak up the outdated udev syntax to modern
+	  looks.
+	* Makefile.am: pick up libnjb.fdi.
+	* configure.ac: set to 2.2.6 and release long overdue update
+	  of libnjb.
+
+2007-08-30  Linus Walleij  <triad@df.lth.se>
+
+	* src/unicode.c: subtle Chinese char bug found by 
+	  bookstack@users.sourceforge.net
+
+2007-07-27  Linus Walleij  <triad@df.lth.se>
+
+	* nomad.rules: handle renaming of subsystem by commenting
+	  out some optimized GOTO.
+	
+2007-06-04  Jeff Mitchell  <me@jefferai.com>
+
+	* libnjb.fdi: Added HAL FDI rules
+	* hotplug.sh.in: Add HAL FDI rule install logic
+
+2006-02-17  Linus Walleij  <triad@df.lth.se>
+
+	* sample/sendtr.c: improvements to use cmdline-switches
+	                   only to send tracks.
+
+2006-01-29  Linus Walleij  <triad@df.lth.se>
+
+	* Release libnjb 2.2.5.
+	
+2005-11-23  Linus Walleij  <triad@df.lth.se>
+
+	* nomad.usermap: Added Dell DJ 3
+	* src/base.c: dito.
+	* src/libnjb.h.in: dito.
+
+2005-11-21  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol3.h: extended documentation following a register
+	  scan.
+	* src/protocol3.c: some code cleanups.
+	* src/procedure.c: some code cleanups.
+	
+2005-11-14  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol3.h: added the missing clear playback queue command
+	* src/protocol3.c: dito.
+	* src/procedure.c: added a call to first clear the queue when the
+	  play command is called. (As could be expected.)
+
+2005-10-13  Linus Walleij  <triad@df.lth.se>
+
+	* src/base.c: simplified device table which was
+	  growing wild. Merged protocol/USB version detection
+	  into this file. Move macros to base.h.
+	* src/base.h: reflect changes.
+	* src/njbusb.h: removed - merged into base.c/base.h
+	* Several other files affected by removal of
+	  njbusb.h.
+	* Some minor code cleanups started with this.
+
+2005-10-11  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: working on DLL generation for Windows.
+	* src/Makefile.am: dito.
+	* src/libnjb.sym: a symbol table for exports.
+	* configure.ac: Bump version to 2.2.5
+
+2005-10-10  Linus Walleij  <triad@df.lth.se>
+
+	* Release libnjb 2.2.4 with Creative Zen support.
+
+2005-10-08  Linus Walleij  <triad@df.lth.se>
+
+	* nomad.usermap: added Creative Zen (a Micro variant)
+	* njbusb.h: dito.
+	* base.c: dito.
+	* procedure.c: dito.
+
+2005-10-01  Linus Walleij  <triad@df.lth.se>
+
+	* src/libnjb.h.in: added #define for Get_File_fd to
+	  point to Get_Track_fd for completeness.
+	* windows/libnjb.h: updated to 2.2.4. Remember to do
+	  this again if the API change even more.
+
+2005-09-27  Linus Walleij  <triad@df.lth.se>
+
+	* src/procedure.c: missed one routine, + use #defined
+	  types, not magic values.
+	* src/protocol3.c: use #defined types, not magic values.
+
+2005-09-26  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: bumped to 2.2.4, removed turbo deactivation
+	  flag since this is now user-configurable.
+	* src/libnjb.h.in: added a function to activate/deactivate turbo
+	  mode on devices at the suggestion of Richard Low.
+	* src/procedure.c: dito.
+	* src/protocol3.c: dito.
+	* src/protocol3.h: dito.
+	* src/Makefile.am: increased library CURRENT and AGE variables,
+	  so as to reflect that an interface has been added, none
+	  deleted.
+
+2005-09-22  Linus Walleij  <triad@df.lth.se>
+
+	* src/procedure.c: patch from Richard Low that fix an oddity
+	  in the NJB3 firmware for recordings.
+	
+2005-09-20  Linus Walleij  <triad@df.lth.se>
+
+	* src/procedure.c: fixed device name strings to match those 
+	  used on the Creative homepages.
+
+2005-09-19  Linus Walleij  <triad@df.lth.se>
+
+	* Release libnjb-2.2.3.
+	
+2005-09-18  Linus Walleij  <triad@df.lth.se>
+
+	* nomad.usermap: (and several more files) implement support
+	  for the Creative Zen Sleek.
+
+2005-09-07  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: bump to version 2.2.3.
+
+2005-09-07  Polar Humenn   <polar@adiron.com>
+
+	* src/procedure.c: maintains buff semantics in callback functions
+	  for protocol 3 devices, which was ignored, and caused seg faults
+	  in some players not expecting the change.
+	* src/protocol3.c: fixes logic associated with NJB_Elapsed_Time
+	  in indicating the end or change of a playing song. It's still
+	  a hack.
+
+2005-09-06  Linus Walleij  <triad@df.lth.se>
+
+	* Makefile.am: fixes a dist-hook to remove CVS dirs from
+	  the windows/ subdirectory.
+	* Release libnjb 2.2.2.
+	
+2005-08-30  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: bump to version 2.2.2
+	* src/base.c: add debug prints to USB low-level IF location stuff.
+	* Makefile.am: redistribute "windows" subdir
+	* windows/*: stuff needed to compile with MSVC
+	* sample/common.h: created a shared header file
+	* sample/*.c: use the shared header file.
+	* sample/Makefile.am: dependencies for the header file.
+
+2005-08-29  Linus Walleij  <triad@df.lth.se>
+
+	* src/procedure.c: fixes to compile under Microsoft MSVC
+	* src/protocol.c: dito
+	* src/ioutil.c: dito
+	* src/defs.h: fixes to deal with non-GNU compilers
+	
+2005-08-16  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol3.c: Zen Touch says error code 0x000e
+	  on deletion of playlists for some reason.
+	* src/protocol3.c: Make libnjb report playlists as
+	  UNCHANGED since they ARE UNCHANGED after just
+	  scanning them.
+	* sample/playlists.c: detect UTF-8 in this program
+	  too, playlists may have esoteric names.
+
+2005-08-15  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol3.h: just docs.
+	* src/usb_io.c: report errors from libusb correctly.
+
+2005-08-12  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol3.c: fixed a potential playlist population
+	  issue related to Zen Touches. These seem to sign empty
+	  playlist or last playlist chunk with status code 0x0001.
+	  Try to verify if this is really it.
+
+2005-08-01  Linus Walleij  <triad@df.lth.se>
+
+	* Released libnjb 2.2.1.
+
+2005-07-30  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: bumped to version 2.2.1
+	* doc/Makefile.am: moved docs to libnjb-X.Y.Z so one
+	  knows which version the docs are for. Moved to separate
+	  /html subfolder.
+	* doc/Doxyfile.in: removed the pesky warnings etc. One
+	  can turn them on when working on documentation.
+
+2005-07-24  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol3.h: added "not implemented" status response.
+	* src/protocol3.c: added severeal quirks to handle a non-implemented
+	  EAX name array.
+
+2005-06-27  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol.c: disabled a bad error code and corrected a
+	  strncpy() call with bad arguments. (GCC 4.0.0 found it.)
+	* src/procedure.c: typecasts courtesy of GCC 4.0.0.
+	* src/playlist.c: dito.
+	* src/datafile.c: dito.
+	* src/songid.c: dito.
+	* src/protocol3.c: dito.
+	* src/unicode.c: dito.
+	* sample/sendfile.c: dito.
+	* sample/sendtr.c: dito.
+	* sample/setpbm.c: dito.
+	* sample/handshake.c: BSD old GCC no C-90 fix.
+	* Released this as libnjb 2.2.
+
+2005-06-15  Linus Walleij  <triad@df.lth.se>
+
+	* libnjb.spec: updated a specfile which was quite unmodern,
+	  assisted by rpmlint.
+
+2005-06-13  Linus Walleij  <triad@df.lth.se>
+
+	* src/libnjb.h.in: Get rid of njbid_t struct entirely, move
+	  into getter functions and device states for respective
+	  protocol. One must now use a getter function to retrieve
+	  device name, type, firmware and hardware revisions.
+	* src/protocol.h: dito.
+	* src/protocol.c: dito.
+	* src/protocol3.h: dito.
+	* src/protocol3.c: dito.
+	* src/base.c: dito.
+	* src/procedure.c: dito.
+
+2005-06-12  Linus Walleij  <triad@df.lth.se>
+
+	* src/libnjb.h.in: Audible codec support patch from Richard 
+	  Low.
+	* src/songid.c: dito.
+	* src/protocol3.h: dito.
+	* src/protocol3.c: dito.
+
+2005-06-08  Linus Walleij  <triad@df.lth.se>
+
+	* src/libnjb.h.in: moved SDMI ID into the device state.
+	* src/procedure.c: dito.
+	* src/protocol.c: dito.
+	* src/protocol.h: dito.
+	* src/protocol3.c: dito.
+	* src/protocol3.h: dito.
+	* sample/handshake.c: dito.
+
+2005-06-07  Linus Walleij  <triad@df.lth.se>
+
+	* doc/Doxyfile.in: tweak so that examples are shown
+	  properly again.
+	
+2005-06-05  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: bump to version 2.2.
+	* src/libnjb.h.in: Added functions for getting charging
+	  status and auxilary power status. Moving NJB1 power
+	  stuff into the protocol.c/protocol.h files.
+	* src/protocol3.h: dito.
+	* src/protocol3.c: dito.
+	* src/procedure.c: dito.
+	* src/protocol.h: moving in power status stuff to the
+	  NJB1 device state struct.
+	* src/protocol.c: dito.
+	* sample/handshake.c: reflect change.
+	* src/Makefile.am: revising interface due to change.
+	* libnjb.spec: explicit dependency on ncurses.
+
+2005-05-16  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: bumped to 2.1.2 and released
+	  to reflect the added default program prefix.
+
+2005-05-15  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: forced the default program prefix to 
+	  "njb-" using some undocumented behaviour of
+	  autoconf...
+
+2005-05-13  Linus Walleij  <triad@df.lth.se>
+
+	Bumped to version 2.1.1 to follow a common naming scheme
+	for libnjb interfaces in source, on Debian and in Fedora 
+	packages.
+	
+	* configure.ac: reflected version number.
+	* libnjb.spec: reflected version number.
+
+2005-05-12  Linus Walleij  <triad@df.lth.se>
+
+	* src/Makefile.am: set the interface version to 5.0.1
+	  since that is what Shaun use in the Debian package.
+	* HACKING: notices on interface versioning.
+
+2005-05-10  Linus Walleij  <triad@df.lth.se>
+
+	Released libnjb 2.1.
+	
+	Lots of documentation updates and Makefile system fixes 
+	prior to the 2.1 release.
+	
+2005-04-28  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol.c: patch from David A. Knight fixing some
+	  error reporting stuff for the NJB1.
+
+2005-04-26  Linus Walleij  <triad@df.lth.se>
+
+	* src/procedure.c: patch from David A. Knight fixing a 
+	  problem with the battery status return value.
+
+2005-04-20  Linus Walleij  <triad@df.lth.se>
+
+	* src/libnjb.h.in: added Solaris support.
+	* README: Notice about Solaris.
+
+2005-04-18  Linus Walleij  <triad@df.lth.se>
+
+	* src/procedure.c: disabled bitmap change on Zen Touch
+	  firmware 1.01.06 and higher: Creative broke this feature.
+	
+2005-04-13  Linus Walleij  <triad@df.lth.se>
+
+	* src/protocol3.c: bad PANIC message for delete item.
+
+2005-04-11  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: adding prerequisite macro, AC_SUBST():ing
+	  OSFLAGS so that libnjb.pc works again
+	* sample/handshake.c: more detailed power reporting.
+	* doc/Makefile.in: removing, no autofiles in CVS.
+
+2005-04-08  Linus Walleij  <triad@df.lth.se>
+
+	* src/libnjb.h.in: added a function to retrieve battery level.
+	* src/procedure.c: Ditto
+	* src/protocol3.h: Ditto
+	* src/protocol3.c: Ditto
+	* src/Makefile.am: bumped interface revision to reflect change.
+
+	Removed autogenerated files:
+	
+	* config.sub: Removed - no autotool stuff
+	* config.guess: Ditto
+	* Makefile.in, src/Makefile.in, sample/Makefile.in: Ditto
+	* configure: Ditto
+	* README: Added autogen.sh notice.
+	
+2005-04-08  Linus Walleij  <triad@df.lth.se>
+
+	* src/unicode.c fixed the lamest unicode error which caused e.g.
+	  cyrillic characters to be converted incorrectly when editing
+	  or transferring cyrillic files to the device.
+
+2005-04-04  Linus Walleij  <triad@df.lth.se>
+
+	* configure.ac: introduce parameter for switching speed enhancements
+	  on/off (--no-turbo). Remove the AC_SUBST for CFLAGS (no good,
+	  replaced the Darwin -DUSE_DARWIN flags for instance).
+	* src/procedure.c: introduce conditional speed enhancement code.
+	* src/protocol3.h: rename transfer block sizes to DEFAULT
+	  transfer block sizes.
+	* windows/README.TXT: some more notices on usage.
+	* README: Solaris usage.
+	* Regenerated several automake/autoconf files (sorry).
+
+2005-03-29  Shaun Jackman  <sjackman@gmail.com>
+
+	* configure.ac: Test for libcurses.
+	* sample/Makefile.am: Compile cursesplay if libcurses is present.
+	* sample/cursesplay.c: Use NJB_Error_Dump instead of njb_error_dump.
+	* Makefile.in: Regenerate.
+	* aclocal.m4: Ditto.
+	* config.h.in: Ditto.
+	* configure: Ditto.
+	* doc/Makefile.in: Ditto.
+	* sample/Makefile.in: Ditto.
+	* src/Makefile.in: Ditto.
+
+2005-03-29  Linus Walleij  <triad@df.lth.se>
+
+	Added a function for retrieveing the battery status of the device,
+	known as device data 0x0114 inside the device.
+
+	Fixed some Windows build problems.
+	
+	Renamed "configure.in" to "configure.ac".
+
+2005-03-27  Shaun Jackman  <sjackman@gmail.com>
+
+	* AUTHORS: Add Shaun Jackman for automakification.
+	* Doxyfile: Remove file. Move Doxyfile to doc/Doxyfile.in.
+	* Makefile.am: New file.
+	* acconfig.h: Remove file.
+	* autogen.sh: New file.
+	* configure.in: Rewritten nearly from scratch.
+	* libnjb.pc.in: Use @VERSION@ instead of @LIBNJB_VERSION@.
+	* src/libnjb.h.in: Ditto.
+	* src/njbusb.h (DEFAULT_DEV): Remove. It is unused.
+	* src/procedure.c: Include config.h for HAVE_USLEEP.
+	* src/Makefile.am: New file.
+	* doc/Doxyfile.in: New file. Move Doxyfile to doc/Doxyfile.in.
+	* doc/Makefile.am: New file.
+	* sample/Makefile.am: New file.
+	* sample/fwupgrade.c: Include config.h for HAVE_GETOPT_H
+		and HAVE_LIBGEN_H. Use HAVE_ZLIB_H instead of HAVE_ZLIB.
+	(dexor_fw_image): Make static.
+	(decompress_fw_image): Ditto.
+	(write_fw_file):  Ditto. Prevent unused variable warnings.
+	* sample/setpbm.c: Include config.h for HAVE_GETOPT_H.
+	(skip_whitespaces): Make static.
+	(verify_pbm): Ditto.
+	* sample/cursesplay.c: Include config.h for HAVE_GETOPT_H.
+	* sample/delfile.c: Ditto.
+	* sample/deltr.c: Ditto.
+	* sample/dumpeax.c: Ditto.
+	* sample/dumptime.c: Ditto.
+	* sample/files.c: Ditto.
+	* sample/getfile.c: Ditto.
+	* sample/getowner.c: Ditto.
+	* sample/gettr.c: Ditto.
+	* sample/getusage.c: Ditto.
+	* sample/handshake.c: Ditto.
+	* sample/pl.c: Ditto.
+	* sample/play.c: Ditto.
+	* sample/playlists.c: Ditto.
+	* sample/sendfile.c: Ditto.
+	* sample/sendtr.c: Ditto.
+	* sample/setowner.c: Ditto.
+	* sample/settime.c: Ditto.
+	* sample/tagtr.c: Ditto.
+	* sample/tracks.c: Ditto.
+	* config.h.in: Generate new file.
+	* doc/Makefile.in: Ditto.
+	* Makefile.in: Regenerate.
+	* doc/Makefile.in: Ditto.
+	* sample/Makefile.in: Ditto.
+	* src/Makefile.in: Ditto.
+
+2005-03-24 Linus Walleij  <triad@df.lth.se>
+
+	A fixed nomad.usermap that fixes hotplugging for some.
+	
+2005-03-23 Linus Walleij  <triad@df.lth.se>
+
+	Simplified upload file handling to just use read();
+
+	Added a firmware upgrade program that will be able to extract
+	firmware from (some) windows executables using Zlib, then
+	sends it to the jukebox.
+
+2005-03-10 Linus Walleij  <triad@df.lth.se>
+
+	Renumbered the library interface giving it version 4.0.0 at
+	the suggestion of Shaun Jackman from Debian.
+
+	Fixed a minor glitch in the delfile.c sample program.
+
+2005-03-08 Linus Walleij  <triad@df.lth.se>
+
+	Some notes on the length attribute for track upload/tag replace
+	example code. One can live without it but it's not good.
+
+2005-03-03 Linus Walleij  <triad@df.lth.se>
+
+	Moved old CHANGES file into ChangeLog-old, creating this new
+	annotated ChangeLog file in accordance with GNU project standards.
+
+2005-03-02 Linus Walleij  <triad@df.lth.se>
+
+	Released libnjb 2.0.

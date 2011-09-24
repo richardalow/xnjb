@@ -1,0 +1,8 @@
+Makefile
+Makefile.in
+libnjb.h
+*.lo
+*.so.*
+.deps
+.libs
+libnjb.la

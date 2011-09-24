@@ -1,0 +1,21 @@
+LIBNJB was concieved and written by:
+------------------------------------
+John Mechalas <seagull@aracnet.com>
+
+Contributors:
+-------------
+Linus Walleij <triad@df.lth.se> (Much code, Windows port)
+César Talon (NJB 3 initial code)
+David A. Knight <david@ritter.demon.co.uk> (Code, especially for NJB1)
+Dwight Engen <dengen40@yahoo.com> (NJB Zen stuff)
+Bernie <bernie@knup.de> (NJB 2 stuff)
+Paul Lalonde <plalonde@telus.net> (NJB Zen USB 2.0 stuff)
+Tom LeRoux <tom@harborcoat.com> (Dell Digital Jukebox stuff)
+Friso Brugmans <njblib@brugmans.nu> (NJB Zen NX stuff)
+Ryan Marsh <ryan_marsh@yahoo.com> (MacOS X porting, fixing and testing)
+Richard Low <richard@wentnet.com> (MacOS X porting, fixing and testing)
+Michael a.k.a. LuNaTiC (NJB Zen Touch testing)
+Shaun Jackman <sjackman@gmail.com> (Debian packaging, automakification)
+Kevin Williams <zakzak@gmail.com> (MSVC++ 8 port)
+Polar Humenn <polar@adiron.com> (playback hacks)
+...and several other people on the libnjb-users mailing list.
