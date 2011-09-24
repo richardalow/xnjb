@@ -111,8 +111,6 @@
 - (void)cancelCurrentTransaction;
 - (NJBTransactionResult *)uploadAlbumArtForTrack:(Track *)track;
 - (NJBTransactionResult *)uploadAlbumArt:(NSBitmapImageRep *)imageRep forAlbum:(Album *)album;
-- (void)runNotificationLoopWithObject:(id)obj;
-- (NJBTransactionResult *)connectWithIterator;
 
 int progress (u_int64_t sent, u_int64_t total, const char* buf, unsigned len, void *data);
 int mtp_progress (uint64_t const sent, uint64_t const total, void const * const data);

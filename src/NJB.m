@@ -433,7 +433,7 @@ io_iterator_t deviceAddedIter;
 		return nil;
 	const char *name = NJB_Get_Device_Name(njb, 1);
 	if (name != NULL)
-		return [NSString stringWithCString:name];
+		return [NSString stringWithUTF8String:name];
 	else
 		return nil;
 }
@@ -536,7 +536,7 @@ io_iterator_t deviceAddedIter;
 				// in case it's a string
 				else if (frame->type == NJB_TYPE_STRING && frame->data.strval != NULL)
 				{
-					NSString *trackNumber = [NSString stringWithCString:frame->data.strval];
+					NSString *trackNumber = [NSString stringWithUTF8String:frame->data.strval];
 					[track setTrackNumber:(unsigned)[trackNumber intValue]];
 				}
 				else
@@ -574,7 +574,7 @@ io_iterator_t deviceAddedIter;
 				// strings on NJB1
 				else if (frame->type == NJB_TYPE_STRING && frame->data.strval != NULL)
 				{
-					NSString *year = [NSString stringWithCString:frame->data.strval];
+					NSString *year = [NSString stringWithUTF8String:frame->data.strval];
 					[track setYear:(unsigned)[year intValue]];
 				}
 				else
@@ -1063,15 +1063,15 @@ io_iterator_t deviceAddedIter;
 	{
 		NJB_Reset_Get_Datafile_Tag(njb);
 		njb_datafile_t *filetag;
-		while (filetag = NJB_Get_Datafile_Tag(njb))
+		while ((filetag = NJB_Get_Datafile_Tag(njb)))
 		{
 			NSString *filename = @"";
 			if (filetag->filename != NULL)
-				filename = [NSString stringWithCString:filetag->filename];
+				filename = [NSString stringWithUTF8String:filetag->filename];
 			NSArray *pathArray = nil;
 			if (filetag->folder != NULL)
 			{
-				NSString *folder = [NSString stringWithCString:filetag->folder];
+				NSString *folder = [NSString stringWithUTF8String:filetag->folder];
 				// this has \\ instead of /
 				pathArray = [folder componentsSeparatedByString:@"\\"];
 				pathArray = [Directory normalizePathArray:pathArray];
@@ -1911,7 +1911,7 @@ int mtp_progress(uint64_t const sent, uint64_t const total, void const * const d
 		int result;
 		result = NJB_Get_SDMI_ID(njb, &(sdmiid[0]));
 		if (result != 0)
-			idString = @"";
+			[idString setString:@""];
 		
 		for (j = 0; j < 16; j++)
 		{

@@ -141,7 +141,7 @@
 	double time = -[date timeIntervalSinceNow];
 	NSLog(@"Time taken: %f", time);
 	
-	NSLog(@"Duplicates found: %d", [duplicates count]);
+	NSLog(@"Duplicates found: %lu", [duplicates count]);
 	
 	return [duplicates autorelease];
 }

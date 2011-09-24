@@ -4,3 +4,4 @@ build/*
 XNJB.xcodeproj/richard.*
 *.orig
 XNJB.xcodeproj/project.xcworkspace/xcuserdata/*
+XNJB.xcodeproj/xcuserdata/*
