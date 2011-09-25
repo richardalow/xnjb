@@ -30,7 +30,7 @@ This file has been modified by Richard Low to use in XNJB.
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "unicode.h"
+#include "wma_unicode.h"
 
 gboolean guid_compare(guchar *guid1, guchar *guid2);
 void get_ucs2_string(const guchar *in, guint length, gchar **out);
@@ -80,7 +80,7 @@ void get_ucs2_string(const guchar *in, guint length, gchar **out)
 		// on big endian platforms
 		in2[i] = in[2*i] + (in[(2*i)+1] << 8);
 	}
-  *out = g_utf16_to_utf8((const gunichar2 *)in2, length, NULL, NULL);
+	*out = g_utf16_to_utf8((const gunichar2 *)in2, length, NULL, NULL);
 	free(in2);
 }
 

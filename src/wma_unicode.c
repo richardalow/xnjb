@@ -12,7 +12,7 @@
  * Copyright (C) 2000 Red Hat, Inc.
  */
 
-#include "unicode.h"
+#include "wma_unicode.h"
 #include <stdlib.h>
 #include <stdio.h>
 

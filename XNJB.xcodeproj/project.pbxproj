@@ -84,6 +84,8 @@
 		79744EEA116F96F200B8E696 /* usbi.h in Headers */ = {isa = PBXBuildFile; fileRef = 79744EE2116F96F200B8E696 /* usbi.h */; };
 		797954D0142E05A200FDA262 /* libtaglib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 797407120F6BDC3A0075149C /* libtaglib.a */; };
 		797954D1142E05A200FDA262 /* libusb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 793B6DF008255CCC00A43F5B /* libusb.a */; };
+		797954D4142F255200FDA262 /* wma_unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = 797954D2142F255100FDA262 /* wma_unicode.c */; };
+		797954D5142F255200FDA262 /* wma_unicode.h in Headers */ = {isa = PBXBuildFile; fileRef = 797954D3142F255100FDA262 /* wma_unicode.h */; };
 		797BCD9A06B81C7800DA245C /* running.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 797BCD9906B81C7800DA245C /* running.tiff */; };
 		797BCDA106B81D1300DA245C /* success.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 797BCDA006B81D1300DA245C /* success.tiff */; };
 		797BCDAD06B8529400DA245C /* failure.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 797BCDAB06B8529400DA245C /* failure.tiff */; };
@@ -149,8 +151,6 @@
 		79B7D0F711706F2400CDBC4D /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 79B7D0F111706F2400CDBC4D /* Preferences.nib */; };
 		79B8F0E106FAF23900107815 /* WMATagger.h in Headers */ = {isa = PBXBuildFile; fileRef = 79B8F0DF06FAF23900107815 /* WMATagger.h */; };
 		79B8F0E206FAF23900107815 /* WMATagger.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B8F0E006FAF23900107815 /* WMATagger.m */; };
-		79B8F4EA06FB5B9800107815 /* unicode.h in Headers */ = {isa = PBXBuildFile; fileRef = 79B8F4E806FB5B9800107815 /* unicode.h */; };
-		79B8F4EB06FB5B9800107815 /* unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = 79B8F4E906FB5B9800107815 /* unicode.c */; };
 		79B8F4ED06FB5BFE00107815 /* glibdefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 79B8F4EC06FB5BFE00107815 /* glibdefs.h */; };
 		79B8F54D06FB5DB700107815 /* UnicodeWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 79B8F54B06FB5DB700107815 /* UnicodeWrapper.h */; };
 		79B8F54E06FB5DB700107815 /* UnicodeWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B8F54C06FB5DB700107815 /* UnicodeWrapper.m */; };
@@ -431,6 +431,8 @@
 		79744EE0116F96F200B8E696 /* usb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = usb.c; path = libusb/usb.c; sourceTree = "<group>"; };
 		79744EE1116F96F200B8E696 /* usb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usb.h; path = libusb/usb.h; sourceTree = "<group>"; };
 		79744EE2116F96F200B8E696 /* usbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usbi.h; path = libusb/usbi.h; sourceTree = "<group>"; };
+		797954D2142F255100FDA262 /* wma_unicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wma_unicode.c; path = src/wma_unicode.c; sourceTree = "<group>"; };
+		797954D3142F255100FDA262 /* wma_unicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wma_unicode.h; path = src/wma_unicode.h; sourceTree = "<group>"; };
 		797BCD9906B81C7800DA245C /* running.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = running.tiff; path = Resources/images/running.tiff; sourceTree = "<group>"; };
 		797BCDA006B81D1300DA245C /* success.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = success.tiff; path = Resources/images/success.tiff; sourceTree = "<group>"; };
 		797BCDAB06B8529400DA245C /* failure.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = failure.tiff; path = Resources/images/failure.tiff; sourceTree = "<group>"; };
@@ -547,8 +549,6 @@
 		79B7D12E11706F9C00CDBC4D /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Resources/Swedish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		79B8F0DF06FAF23900107815 /* WMATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WMATagger.h; path = src/WMATagger.h; sourceTree = "<group>"; };
 		79B8F0E006FAF23900107815 /* WMATagger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WMATagger.m; path = src/WMATagger.m; sourceTree = "<group>"; };
-		79B8F4E806FB5B9800107815 /* unicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unicode.h; path = src/unicode.h; sourceTree = "<group>"; };
-		79B8F4E906FB5B9800107815 /* unicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unicode.c; path = src/unicode.c; sourceTree = "<group>"; };
 		79B8F4EC06FB5BFE00107815 /* glibdefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glibdefs.h; path = src/glibdefs.h; sourceTree = "<group>"; };
 		79B8F54B06FB5DB700107815 /* UnicodeWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnicodeWrapper.h; path = src/UnicodeWrapper.h; sourceTree = "<group>"; };
 		79B8F54C06FB5DB700107815 /* UnicodeWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnicodeWrapper.m; path = src/UnicodeWrapper.m; sourceTree = "<group>"; };
@@ -1033,9 +1033,9 @@
 		7999906E06F8ADD0009596D1 /* C */ = {
 			isa = PBXGroup;
 			children = (
+				797954D2142F255100FDA262 /* wma_unicode.c */,
+				797954D3142F255100FDA262 /* wma_unicode.h */,
 				79B8F4EC06FB5BFE00107815 /* glibdefs.h */,
-				79B8F4E806FB5B9800107815 /* unicode.h */,
-				79B8F4E906FB5B9800107815 /* unicode.c */,
 				7999906F06F8ADE9009596D1 /* wmaread.c */,
 				7999907006F8ADE9009596D1 /* wmaread.h */,
 			);
@@ -1474,7 +1474,6 @@
 				79A624D006EE10240078323B /* MyItem.h in Headers */,
 				7999907206F8ADE9009596D1 /* wmaread.h in Headers */,
 				79B8F0E106FAF23900107815 /* WMATagger.h in Headers */,
-				79B8F4EA06FB5B9800107815 /* unicode.h in Headers */,
 				79B8F4ED06FB5BFE00107815 /* glibdefs.h in Headers */,
 				79B8F54D06FB5DB700107815 /* UnicodeWrapper.h in Headers */,
 				79AF7B80075E288A0096E0E1 /* njbtime.h in Headers */,
@@ -1498,6 +1497,7 @@
 				79FF1AC50CD9305A00ACE55B /* music-players.h in Headers */,
 				79FF1AC70CD9306D00ACE55B /* device-flags.h in Headers */,
 				7989957C0E58114C00037F32 /* playlist-spl.h in Headers */,
+				797954D5142F255200FDA262 /* wma_unicode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1762,7 +1762,6 @@
 				79A624D106EE10240078323B /* MyItem.m in Sources */,
 				7999907106F8ADE9009596D1 /* wmaread.c in Sources */,
 				79B8F0E206FAF23900107815 /* WMATagger.m in Sources */,
-				79B8F4EB06FB5B9800107815 /* unicode.c in Sources */,
 				79B8F54E06FB5DB700107815 /* UnicodeWrapper.m in Sources */,
 				79AF7B7F075E288A0096E0E1 /* njbtime.c in Sources */,
 				795E14D2076E324F00B48423 /* DragDropTableView.m in Sources */,
@@ -1781,6 +1780,7 @@
 				79890A810B99E69200A68B78 /* Album.m in Sources */,
 				7989957D0E58114C00037F32 /* playlist-spl.c in Sources */,
 				79B7D0E311706E0A00CDBC4D /* main.m in Sources */,
+				797954D4142F255200FDA262 /* wma_unicode.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1931,7 +1931,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -1972,7 +1972,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -2002,7 +2002,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "";
@@ -2025,7 +2025,7 @@
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
 				OTHER_CFLAGS = "";
@@ -2058,7 +2058,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
@@ -2067,8 +2067,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/richard/njb/XNJB/build,
-					/Users/richard/njb/XNJB,
 					"\"$(SRCROOT)/build/Deployment Debug\"",
 					"\"$(SRCROOT)/build/Development\"",
 				);
@@ -2104,7 +2102,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -2112,9 +2110,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/richard/njb/hg/xnjb.hg/libs,
-					/Users/richard/njb/hg/xnjb.hg/build,
-					/Users/richard/njb/hg/xnjb.hg,
 					"\"$(SRCROOT)/build/Deployment Debug\"",
 					"\"$(SRCROOT)/build/Development\"",
 				);
@@ -2177,7 +2172,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -2208,7 +2203,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = XNJB_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -2216,8 +2211,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/richard/njb/XNJB/build,
-					/Users/richard/njb/XNJB,
 					"\"$(SRCROOT)/build/Deployment Debug\"",
 					"\"$(SRCROOT)/build/Development\"",
 				);
@@ -2274,7 +2267,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/QtCore.framework/Versions/4/Headers,
 					/usr/include/QtCore,
@@ -2306,7 +2299,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/QtCore.framework/Versions/4/Headers,
 					/usr/include/QtCore,
@@ -2342,7 +2335,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/QtCore.framework/Versions/4/Headers,
 					/usr/include/QtCore,
@@ -2373,7 +2366,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_LDFLAGS = (
 					"-framework",
